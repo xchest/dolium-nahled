@@ -99,14 +99,14 @@ body.lock{overflow:hidden}
 .layer{display:none}
 /* znak D přiletí z intra a zůstane na vratech jako starý bronz s patinou, plochý, 80 % krytí; D je zvednuté, pod ním DOLIUM */
 .gatemark{position:absolute;left:55.85%;top:43%;opacity:0;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform;pointer-events:none}
-.gatemark svg{position:relative;display:block;width:min(calc(var(--sw) * .093),23vw);height:min(calc(var(--sw) * .093),23vw);overflow:visible;opacity:.8}
+.gatemark svg{position:relative;display:block;width:min(calc(var(--sw) * .093),23vw);height:min(calc(var(--sw) * .093),23vw);overflow:visible;opacity:.9}
 /* DOLIUM svisle na vratech pod D, stejný bronz; pod čarou vody (59,9 %) jeho statický odraz */
 .gateword{position:absolute;left:55.85%;width:calc(var(--sw) * .16);aspect-ratio:300/40;pointer-events:none;opacity:0;transition:opacity 1.6s}
 .gateword svg{display:block;width:100%;height:100%;overflow:visible}
 .gateword.up{top:58.4%;transform:translate(-50%,-100%)}
 .gateword.down{top:61.4%;transform:translateX(-50%) scaleY(-1);filter:blur(.6px);
   -webkit-mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%);mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%)}
-.gateword.on.up{opacity:.8}.gateword.on.down{opacity:.6}
+.gateword.on.up{opacity:.97}.gateword.on.down{opacity:.66}
 .gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1)}
 .gatemark.on{opacity:1}
 .gatemark::after{content:"";position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 38%,rgba(255,252,240,.95) 50%,transparent 62%) 160% 0/300% 100% no-repeat;mix-blend-mode:plus-lighter;opacity:0}
@@ -183,6 +183,7 @@ body.lock{overflow:hidden}
 .ylist li span{display:block;font-size:12px;color:#8a9a93;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ylist li.run b::after{content:" · pokračuje";font-weight:400;font-size:11px;color:var(--sand)}
 @media (min-width:861px){.card ul{display:none}}
+.drum{display:none}
 
 /* ---------- seznam, o nás, kontakt ---------- */
 .list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -217,8 +218,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 @media (max-width:860px){
   .counter{top:64px;bottom:auto;height:28svh;width:100%;border-radius:0}
-  .card{bottom:52px!important}.card .meta{padding-top:10px}.card .meta h3{font-size:17px;margin:4px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card .meta p{font-size:13px}
-  .counter::before{margin-bottom:12px}.counter::after{margin-top:10px}
+  .card{top:calc(104px + 31svh)!important;bottom:auto!important}.card .meta{padding-top:10px}.card .meta h3{font-size:17px;margin:4px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card .meta p{font-size:13px}
+  .counter::before,.counter::after,.odo{display:none}
+  .counter{top:100px;height:31svh;cursor:auto;touch-action:auto}
+  /* buben let pod palcem: nativní scroll se zaskakováním, prostřední rok je vybraný */
+  .drum{--rh:min(58px,8.6svh);display:block;width:100%;height:calc(var(--rh) * 3);overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none;touch-action:pan-y;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 32%,#000 68%,transparent);mask-image:linear-gradient(180deg,transparent,#000 32%,#000 68%,transparent)}
+  .drum::-webkit-scrollbar{display:none}
+  .drum ol{list-style:none;margin:0;padding:var(--rh) 0}
+  .drum li{height:var(--rh);line-height:var(--rh);scroll-snap-align:center;text-align:center;font-family:Fraunces,Georgia,serif;font-size:calc(var(--rh) * .6);letter-spacing:.04em;color:#5f716a;transition:color .2s,transform .2s}
+  .drum li.on{color:#fff;transform:scale(1.5)}
+  .counter small{margin-top:10px}.counter .hint{margin-top:8px;padding:0 20px;text-align:center;font-size:11px}
   .card ul{max-height:16svh;margin-top:8px;padding-top:6px}
   .ylist{display:none}
   .odo{font-size:clamp(60px,19vw,100px)}
@@ -282,9 +292,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="scene" id="scene">
     <img src="obrazky/w_komora-1600.webp" alt="Plavební komora Hořín po rekonstrukci">
     <div class="layer" id="lay" aria-hidden="true"><div class="behind"><div class="fall"></div></div><div class="leaf l"></div><div class="leaf r"></div></div>
-    <div class="gatemark" id="gatemark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#6e4e2c" filter="url(#pat)" fill-rule="evenodd" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/></svg></div>
-    <div class="gateword up" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#6e4e2c" filter="url(#pat)">DOLIUM</text></svg></div>
-    <div class="gateword down" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#6e4e2c" filter="url(#pat)">DOLIUM</text></svg></div>
+    <div class="gatemark" id="gatemark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#8f6c37" filter="url(#pat)" fill-rule="evenodd" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/></svg></div>
+    <div class="gateword up" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#cfa652" stroke="#2b1d0b" stroke-width="1.6" paint-order="stroke" filter="url(#pat)">DOLIUM</text></svg></div>
+    <div class="gateword down" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#cfa652" stroke="#2b1d0b" stroke-width="1.6" paint-order="stroke" filter="url(#pat)">DOLIUM</text></svg></div>
   </div>
   <div class="shade"></div>
   <div class="txt"><div class="wrap">
@@ -300,7 +310,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="stage">
     <div class="bg" id="rbg"></div>
     <div class="intro-r" id="rintro">Reference</div>
-    <div class="counter" id="counter" tabindex="0" aria-label="Rok reference — šipkami nebo kolečkem myši"><div class="odo" id="odo" aria-live="polite"></div><small id="rcount"></small><span class="hint" id="rhint">točte kolečkem nad letopočtem</span></div>
+    <div class="counter" id="counter" tabindex="0" aria-label="Rok reference — šipkami nebo kolečkem myši"><div class="odo" id="odo" aria-live="polite"></div><div class="drum" id="drum"><ol></ol></div><small id="rcount"></small><span class="hint" id="rhint">točte kolečkem nad letopočtem</span></div>
     <div class="card" id="cA"></div><div class="card" id="cB"></div><div class="ylist" id="ylist"></div>
     <div class="rail" id="rail"></div>
   </div>
@@ -443,6 +453,10 @@ const digs = [...odo.querySelectorAll('.d span')];
 $('#rail').innerHTML = R.map(() => '<b></b>').join('');
 const ticks = [...document.querySelectorAll('#rail b')];
 const cards = [$('#cA'), $('#cB')]; let cur = -1, flip = 0;
+const mob = matchMedia('(max-width:860px)'), drum = $('#drum');
+drum.firstChild.innerHTML = R.map(r => `<li>${r.y}</li>`).join('');
+const dli = [...drum.querySelectorAll('li')]; let drumSync = false;
+function drumTo(i) { if (!mob.matches) return; drumSync = true; drum.scrollTo({top: i * dli[0].offsetHeight, behavior: RM ? 'auto' : 'smooth'}); clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 650); }
 R.forEach(r => { const i = new Image(); i.src = img(r.f, 800); });
 
 function cardHTML(r) {
@@ -450,8 +464,9 @@ function cardHTML(r) {
   return `<div class="lk"></div><figure><img src="${img(r.f, 800)}" srcset="${img(r.f, 800)} 800w, ${img(r.f, 1600)} 1600w" sizes="(max-width:860px) 100vw, 420px" alt="${esc(r.n)}"></figure>
     <div class="meta"><em>${esc(r.l)} · ${esc(r.o)}</em><h3>${esc(r.n)}</h3><p>${esc(r.p)}</p>${cr}${r.it.length ? `<ul>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><span>${esc(x.n)}</span><i>${x.a === x.b ? esc(x.p) : esc(x.y)}</i></li>`).join('')}</ul>` : ''}</div>`;
 }
-function show(i) {
+function show(i, fromDrum) {
   if (i === cur) return; cur = i; const r = R[i];
+  dli.forEach((li, k) => li.classList.toggle('on', k === i)); if (!fromDrum) drumTo(i);
   [...r.y].forEach((d, k) => digs[k].style.transform = `translateY(-${d}em)`);
   $('#rcount').innerHTML = `<b>${r.cnt}</b> ${pl(r.cnt)} v běhu${r.nov && r.nov < r.cnt ? ` · ${r.nov} ${r.nov === 1 ? 'nová' : r.nov < 5 ? 'nové' : 'nových'}` : ''}`;
   ticks.forEach((t, k) => t.classList.toggle('on', k === i));
@@ -480,19 +495,24 @@ ctr.addEventListener('wheel', e => {
   acc += e.deltaMode === 1 ? d * 40 : d;
   if (Math.abs(acc) >= 40) { step(Math.sign(acc)); ctrDone = true; }
 }, {passive:false});
-ctr.addEventListener('touchstart', e => { ty = e.touches[0].clientY; acc = 0; ctrDone = false; }, {passive:true});
+ctr.addEventListener('touchstart', e => { if (mob.matches) return; ty = e.touches[0].clientY; acc = 0; ctrDone = false; }, {passive:true});
 ctr.addEventListener('touchmove', e => {
   if (ty === null) return; e.preventDefault();
   const y = e.touches[0].clientY; acc += ty - y; ty = y;
   if (!ctrDone && Math.abs(acc) >= 40) { ctrDone = true; if (step(Math.sign(acc))) ctrMoved = true; } // jeden rok na tah
 }, {passive:false});
 ctr.addEventListener('touchend', () => { ty = null; });
+drum.addEventListener('scroll', () => { // prst točí bubnem → rok se mění průběžně
+  if (drumSync) return; const i = Math.max(0, Math.min(N - 1, Math.round(drum.scrollTop / dli[0].offsetHeight))); if (i !== cur) show(i, true);
+}, {passive:true});
+dli.forEach((li, k) => li.onclick = () => show(k));
+mob.addEventListener('change', () => { drum.scrollTop = cur * dli[0].offsetHeight; });
 ctr.addEventListener('keydown', e => {
   const d = {ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1}[e.key];
   if (d) { e.preventDefault(); step(d); }
 });
 ticks.forEach((t, k) => t.onclick = () => show(k));
-if (matchMedia('(hover:none)').matches) $('#rhint').textContent = 'táhněte prstem po letopočtu';
+if (matchMedia('(hover:none)').matches) $('#rhint').textContent = mob.matches ? 'točte palcem · fotku táhněte do strany' : 'táhněte prstem po letopočtu';
 show(0);
 
 /* seznam referencí */
@@ -506,7 +526,7 @@ list();
 
 /* jednotný posun: jedno gesto kolečkem / prstem = další stránka (sekce); delší sekci projde po obrazovkách */
 const PAGES = ['#hero', '#roky', '#reference', '#o-nas', '#kontakt'].map(q => $(q)).filter(Boolean);
-let pgBusy = false, pgLast = 0, ctrMoved = false, tY0 = null, tFromCtr = false;
+let pgBusy = false, pgLast = 0, ctrMoved = false, tY0 = null, tX0 = 0, tFromCtr = false;
 function pageGo(dir) {
   if (pgBusy || document.body.classList.contains('lock')) return;
   const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
@@ -531,11 +551,13 @@ addEventListener('wheel', e => {
   const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : 0;
   if (Math.abs(d) > 2) pageGo(Math.sign(d));
 }, {passive:false});
-addEventListener('touchstart', e => { tY0 = e.touches[0].clientY; tFromCtr = !!e.target.closest('#counter'); ctrMoved = false; }, {passive:true});
-addEventListener('touchmove', e => { if (tY0 !== null && !document.body.classList.contains('lock')) e.preventDefault(); }, {passive:false});
+addEventListener('touchstart', e => { tY0 = e.touches[0].clientY; tX0 = e.touches[0].clientX; tFromCtr = !!e.target.closest('#counter'); ctrMoved = false; }, {passive:true});
+addEventListener('touchmove', e => { if (e.target.closest('#drum')) return; if (tY0 !== null && !document.body.classList.contains('lock')) e.preventDefault(); }, {passive:false});
 addEventListener('touchend', e => {
   if (tY0 === null) return; const dy = tY0 - e.changedTouches[0].clientY; tY0 = null;
-  if (tFromCtr && ctrMoved) return; // prst přetáčel roky
+  if (tFromCtr && (ctrMoved || mob.matches)) return; // prst přetáčel roky
+  const dx = tX0 - e.changedTouches[0].clientX;
+  if (e.target.closest('.card') && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) { step(Math.sign(dx)); return; } // fotka do strany = další / předchozí rok
   if (Math.abs(dy) > 40) { pgLast = 0; pageGo(Math.sign(dy)); }
 }, {passive:true});
 addEventListener('keydown', e => {
