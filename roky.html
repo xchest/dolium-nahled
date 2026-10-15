@@ -16,7 +16,7 @@
   --ease:cubic-bezier(.2,.7,.1,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
+html{overscroll-behavior-y:none;scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 img{display:block;max-width:100%}
@@ -107,9 +107,10 @@ body.lock{overflow:hidden}
 .gatemark svg{position:relative;display:block;width:min(calc(var(--sw) * .093),23vw);height:min(calc(var(--sw) * .093),23vw);overflow:visible;opacity:.8}
 /* DOLIUM z jednoho kusu pískovce plave na hladině (bez zrcadlení) */
 /* DOLIUM vytesané do jednoho bloku pískovce, který plave na hladině: nad vodou ostrý, pod vodou ztmavlý a zvlněný */
-.floatword{position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .045);transform:translateX(-50%) perspective(calc(var(--sw) * .5)) rotateX(58deg);transform-origin:50% 0;pointer-events:none;opacity:0;transition:opacity 1.6s;white-space:nowrap}
+.floatword{position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .006);transform:translateX(-50%) perspective(calc(var(--sw) * .6)) rotateX(38deg);transform-origin:50% 0;pointer-events:none;opacity:0;transition:opacity 1.6s;white-space:nowrap}
 .floatword.on{opacity:1}
-.floatword span{display:block;font-weight:700;letter-spacing:.32em;padding-left:.32em;line-height:1;font-size:min(calc(var(--sw) * .07),11vw);color:rgba(236,218,180,.62);text-shadow:0 0 1px rgba(255,246,226,.5),0 2px 6px rgba(20,30,28,.35);filter:url(#ripple) blur(.35px);mix-blend-mode:screen}
+.floatword span{display:block;font-weight:700;letter-spacing:.32em;padding-left:.32em;line-height:1;font-size:min(calc(var(--sw) * .062),11vw);color:rgba(240,226,192,.7);mix-blend-mode:screen;filter:url(#refl);-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 3px,rgba(0,0,0,.55) 3px 5px),linear-gradient(180deg,#000 40%,rgba(0,0,0,.6));mask-image:repeating-linear-gradient(180deg,#000 0 3px,rgba(0,0,0,.55) 3px 5px);transform:scaleY(1.12)}
+.floatword span.r{transform:scaleY(-1);margin-top:.04em;color:rgba(214,200,168,.5);text-shadow:none;filter:url(#refl2);-webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,.45) 55%,transparent 95%);mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,.45) 55%,transparent 95%)}
 .gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1)}
 .gatemark.on{opacity:1}
 .gatemark::after{content:"";position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 38%,rgba(255,252,240,.95) 50%,transparent 62%) 160% 0/300% 100% no-repeat;mix-blend-mode:plus-lighter;opacity:0}
@@ -256,6 +257,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <pattern id="stoneD" patternUnits="userSpaceOnUse" x="-264.2" y="-129.6" width="516.1" height="337.6"><image href="obrazky/w_komora-1600.webp" width="516.1" height="337.6" preserveAspectRatio="none"/></pattern><pattern id="stoneP" patternUnits="userSpaceOnUse" width="72" height="24"><image href="obrazky/t_piskovec-blok.webp" width="72" height="24" preserveAspectRatio="none"/></pattern><filter id="pat" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="4" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .24  0 0 0 0 .16  0 0 0 0 .09  2.6 0 0 0 -1.15" result="spot"/><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.18" result="grain"/><feComposite in="spot" in2="SourceGraphic" operator="atop" result="a"/><feComposite in="grain" in2="a" operator="atop"/></filter><filter id="bevel" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur in="SourceAlpha" stdDeviation=".9" result="b"/><feSpecularLighting in="b" surfaceScale="3.5" specularConstant=".75" specularExponent="16" lighting-color="#f2f6f8" result="s"><feDistantLight azimuth="225" elevation="42"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/><feComposite in="SourceGraphic" in2="s2" operator="arithmetic" k1="0" k2="1.08" k3=".55" k4="0"/></filter>
   <filter id="wave" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence id="turb2" type="fractalNoise" baseFrequency="0.004 0.045" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+  <filter id="refl" x="-3%" y="-30%" width="106%" height="160%"><feTurbulence id="turb3" type="fractalNoise" baseFrequency="0.0015 0.11" numOctaves="1" seed="5"/><feDisplacementMap in="SourceGraphic" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="refl2" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence id="turb4" type="fractalNoise" baseFrequency="0.002 0.16" numOctaves="1" seed="9"/><feDisplacementMap in="SourceGraphic" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter>
   <filter id="ripple"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.006 0.06" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter>
 </svg>
 
@@ -425,8 +428,8 @@ function endIntro() { // znak z intra se zvětší a přesune na zavřená vrata
 if (RM) { intro.remove(); document.body.classList.remove('lock'); gm.classList.add('on'); fw.classList.add('on'); hero.classList.add('open'); }
 else { setTimeout(endIntro, 2600); intro.onclick = endIntro; }
 if (!RM) { // vlnění hladiny
-  const t = $('#turb'), t2 = $('#turb2'); let k = 0;
-  (function wave(){ k += .012; t.setAttribute('baseFrequency', `${.006 + Math.sin(k)*.0015} ${.06 + Math.cos(k*.8)*.012}`); t2.setAttribute('baseFrequency', `${.004 + Math.sin(k*.7)*.001} ${.045 + Math.cos(k*.6)*.008}`); requestAnimationFrame(wave); })();
+  const t = $('#turb'), t2 = $('#turb2'), t3 = $('#turb3'), t4 = $('#turb4'); let k = 0;
+  (function wave(){ k += .012; t.setAttribute('baseFrequency', `${.006 + Math.sin(k)*.0015} ${.06 + Math.cos(k*.8)*.012}`); t2.setAttribute('baseFrequency', `${.004 + Math.sin(k*.7)*.001} ${.045 + Math.cos(k*.6)*.008}`); t3.setAttribute('baseFrequency', `0.0015 ${.11 + Math.sin(k*.9)*.015}`); t4.setAttribute('baseFrequency', `0.002 ${.16 + Math.cos(k*.7)*.02}`); requestAnimationFrame(wave); })();
 }
 
 /* header */
@@ -439,9 +442,13 @@ const PH = {2026:['w_fas2','Rezidence Turbová','montáž kamenné fasády'], 20
 const OV = {2025:['r00','schodiště a obklady — travertin'], 2021:['r12','obklad mostního pilíře — žula'], 2016:['r11','obklad mostního pilíře — žula']}; // slabá / nevysvětlující fotka roku → vysvětlující detail z galerie
 const span = y => { const m = String(y).match(/(\d{4})\D*(\d{1,4})?/), a = +m[1]; return [a, m[2] ? +(String(a).slice(0, 4 - m[2].length) + m[2]) : a]; };
 REF.forEach(r => [r.a, r.b] = span(r.y));
+// každá stavba má jeden rok: rok své fotky, jinak nejméně obsazený rok svého rozsahu; prázdný rok doplní stavba, která v něm ještě běžela
+const load = {}; REF.filter(r => r.a === r.b).forEach(r => { r.h = r.a; load[r.a] = (load[r.a] || 0) + 1; });
+REF.filter(r => r.a !== r.b).sort((p, q) => (p.b - p.a) - (q.b - q.a)).forEach(r => { const k = window.ROKY.find(x => x.n === r.n && +x.y >= r.a && +x.y <= r.b); let h = k ? +k.y : r.b; if (!k) for (let Y = r.b; Y >= r.a; Y--) if ((load[Y] || 0) < (load[h] || 0)) h = Y; r.h = h; load[h] = (load[h] || 0) + 1; });
 const R = [];
 for (let Y = Math.max(...REF.map(r => r.b)); Y >= Math.min(...REF.map(r => r.a)); Y--) {
-  const it = REF.filter(r => r.a <= Y && Y <= r.b).sort((p, q) => (q.a === Y) - (p.a === Y));
+  let it = REF.filter(r => r.h === Y); if (!it.length) it = REF.filter(r => r.a <= Y && Y <= r.b);
+  it = it.sort((p, q) => (q.a === Y) - (p.a === Y));
   if (!it.length) continue;
   const k = RY[Y], ph = PH[Y], top = k ? it.find(r => r.n === k.n) : ph ? it.find(r => r.n === ph[1]) : null;
   const f = top || it[0];
@@ -493,7 +500,7 @@ ctr.addEventListener('touchstart', e => { ty = e.touches[0].clientY; acc = 0; },
 ctr.addEventListener('touchmove', e => {
   if (ty === null) return; e.preventDefault();
   const y = e.touches[0].clientY; acc += ty - y; ty = y;
-  const n = Math.trunc(acc / 28); if (n) { acc -= n * 28; step(n); }
+  const n = Math.trunc(acc / 28); if (n) { acc -= n * 28; if (step(n)) ctrMoved = true; }
 }, {passive:false});
 ctr.addEventListener('touchend', () => { ty = null; });
 ctr.addEventListener('keydown', e => {
@@ -512,6 +519,45 @@ function list() {
 }
 $('#more').onclick = () => { all = true; list(); };
 list();
+
+/* jednotný posun: jedno gesto kolečkem / prstem = další stránka (sekce); delší sekci projde po obrazovkách */
+const PAGES = ['#hero', '#roky', '#reference', '#o-nas', '#kontakt'].map(q => $(q)).filter(Boolean);
+let pgBusy = false, pgLast = 0, ctrMoved = false, tY0 = null, tFromCtr = false;
+function pageGo(dir) {
+  if (pgBusy || document.body.classList.contains('lock')) return;
+  const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
+  const tops = PAGES.map(el => Math.min(max, Math.round(el.getBoundingClientRect().top + y)));
+  const cs = Math.max(0, tops.findLastIndex(t => t <= y + 4)), page = vh * .88;
+  let to;
+  if (dir > 0) { // nejdřív dočíst aktuální sekci, pak na začátek další
+    const end = cs + 1 < tops.length ? tops[cs + 1] : max + vh, rest = end - (y + vh);
+    to = rest > 8 ? y + Math.min(page, rest) : (cs + 1 < tops.length ? tops[cs + 1] : max);
+  } else { // zpět na začátek sekce; ze začátku sekce do předchozí (dlouhou předchozí po obrazovkách od konce)
+    to = y - tops[cs] > 8 ? Math.max(tops[cs], y - page) : (cs > 0 ? Math.max(tops[cs - 1], tops[cs] - vh) : 0);
+  }
+  to = Math.max(0, Math.min(max, Math.round(to)));
+  if (Math.abs(to - y) < 4) return;
+  pgBusy = true; scrollTo({top: to, behavior: RM ? 'auto' : 'smooth'});
+  const t0 = performance.now();
+  (function wait() { const now = performance.now(); if ((Math.abs(scrollY - to) < 2 || now - t0 > 1400) && now - pgLast > 220) { pgBusy = false; return; } requestAnimationFrame(wait); })();
+}
+addEventListener('wheel', e => {
+  if (e.defaultPrevented || e.ctrlKey || document.body.classList.contains('lock')) return; // kolečko spotřebovalo počítadlo let / zoom
+  e.preventDefault(); pgLast = performance.now();
+  const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : 0;
+  if (Math.abs(d) > 2) pageGo(Math.sign(d));
+}, {passive:false});
+addEventListener('touchstart', e => { tY0 = e.touches[0].clientY; tFromCtr = !!e.target.closest('#counter'); ctrMoved = false; }, {passive:true});
+addEventListener('touchmove', e => { if (tY0 !== null && !document.body.classList.contains('lock')) e.preventDefault(); }, {passive:false});
+addEventListener('touchend', e => {
+  if (tY0 === null) return; const dy = tY0 - e.changedTouches[0].clientY; tY0 = null;
+  if (tFromCtr && ctrMoved) return; // prst přetáčel roky
+  if (Math.abs(dy) > 40) { pgLast = 0; pageGo(Math.sign(dy)); }
+}, {passive:true});
+addEventListener('keydown', e => {
+  if (e.target.closest('#counter, input, textarea')) return;
+  const d = {PageDown:1, ' ':1, ArrowDown:1, PageUp:-1, ArrowUp:-1}[e.key]; if (d) { e.preventDefault(); pgLast = 0; pageGo(d); }
+});
 
 addEventListener('scroll', onHdr, {passive:true});
 onHdr();

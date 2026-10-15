@@ -14,7 +14,7 @@ window.REFS=[
 "c": "budovy"
 },
 {
-"n": "Metro A Českomoravská",
+"n": "Metro B Českomoravská",
 "y": "2025–26",
 "o": "HOCHTIEF CZ a.s.",
 "p": "dlažby, repase",
@@ -36,7 +36,7 @@ window.REFS=[
 },
 {
 "n": "Rekonstrukce Palác Dunaj Národní třída Praha 1",
-"y": "2022–24",
+"y": "2022–25",
 "o": "Geosan Group a.s.",
 "p": "veškeré kamenické práce vč. restaurování",
 "c": "budovy"
