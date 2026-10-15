@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="cs">
-<head>
-<meta name="robots" content="noindex,nofollow">
+<head><meta name="robots" content="noindex,nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOLIUM s.r.o. — kamenické práce pro stavby</title>
@@ -410,7 +409,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---- fotky (id, popisek) ---- */
 const SLIDES = [
-  ['w_komora', 'Historická plavební komora — kvádrové zdivo'],
+  ['w_komora_celek', 'Historická plavební komora — kvádrové zdivo'],
   ['w_fas2', 'Montáž travertinové fasády'],
   ['w_zed2', 'Repase historické zdi — nové pískovcové krycí desky'],
   ['w_fas1', 'Travertinový obklad — osazování'],
@@ -418,13 +417,13 @@ const SLIDES = [
 const OBORY = [
   {c:'metro',   t:'Metro a tunely',            f:'r19'},
   {c:'doprava', t:'Železnice, mosty, silnice', f:'r11'},
-  {c:'voda',    t:'Vodní stavby a zdi',        f:'w_komora'},
+  {c:'voda',    t:'Vodní stavby a zdi',        f:'w_komora_celek'},
   {c:'budovy',  t:'Budovy a památky',          f:'r04'}
 ];
 /* panely na ose: za skupinou daného roku */
 const PAN = {
   '2024': {k:'pan', f:'w_fas2', s:'Fasády', t:'Travertin osazovaný kus po kusu'},
-  '2019': {k:'pan', f:'w_komora', s:'Vodní stavby', t:'Kvádrové zdivo historické plavební komory'},
+  '2019': {k:'duo', a:'w_komora_rek', b:'w_komora_celek', s:'Vodní stavby', t:'Historická plavební komora v rekonstrukci a po ní'},
   '2018': {k:'duo', a:'w_zed1', b:'w_zed2', s:'Repase', t:'Historická zeď před opravou a po ní'},
   '2015': {k:'strip', f:['r16','r17','r18']},
   '2013': {k:'strip', f:['r11','r12','r10']},
@@ -432,7 +431,7 @@ const PAN = {
   '2008': {k:'strip', f:['r07','r08','r14']},
 };
 const G = [
-  ['w_komora','Historická plavební komora — kvádrové zdivo'],['w_fas2','Montáž travertinové fasády'],['w_fas1','Travertinový obklad — osazování'],
+  ['w_komora_celek','Historická plavební komora — kvádrové zdivo'],['w_komora_rek','Plavební komora v rekonstrukci — výměna kvádrů'],['w_fas2','Montáž travertinové fasády'],['w_fas1','Travertinový obklad — osazování'],
   ['w_zed1','Historická zeď před opravou'],['w_zed2','Historická zeď po opravě — nové pískovcové krycí desky'],
   ['r00','Schodiště a obklady — travertin'],['r01','Schodiště a obklady — travertin'],['r02','Schodiště — travertin'],
   ['r03','Schodiště se zábradlím — travertin'],['r07','Náměstí — drobná žulová kostka a kamenné pásy'],['r08','Náměstí — drobná žulová kostka a kamenné pásy'],
