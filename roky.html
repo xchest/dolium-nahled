@@ -194,7 +194,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section class="roky" id="roky" style="padding:0">
   <div class="stage">
     <div class="bg" id="rbg"></div>
-    <div class="intro-r">Reference · 2026 → 2007</div>
+    <div class="intro-r" id="rintro">Reference</div>
     <div class="counter"><div class="odo" id="odo" aria-live="polite"></div><small id="rcount"></small></div>
     <div class="card" id="cA"></div><div class="card" id="cB"></div>
     <div class="rail" id="rail"></div>
@@ -289,6 +289,7 @@ const onHdr = () => hdr.classList.toggle('solid', scrollY > innerHeight * .6);
 /* počítadlo let */
 const R = window.ROKY, N = R.length, sec = $('#roky');
 sec.style.height = `calc(${N} * 70svh + 100svh)`;
+$('#rintro').textContent = `Reference · ${R[0].y} → ${R[N - 1].y}`;
 const odo = $('#odo');
 odo.innerHTML = [0,1,2,3].map(() => `<div class="d"><span>${[...Array(10)].map((_, i) => `<i>${i}</i>`).join('')}</span></div>`).join('');
 const digs = [...odo.querySelectorAll('.d span')];
