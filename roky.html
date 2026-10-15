@@ -101,10 +101,10 @@ body.lock{overflow:hidden}
 .gatemark svg{display:block;width:min(calc(var(--sw) * .14),34vw);height:min(calc(var(--sw) * .14),34vw);filter:drop-shadow(-1px -1px 0 rgba(255,246,226,.7)) drop-shadow(1px 1px 0 #5e4a31) drop-shadow(2px 2px 0 #4c3b26) drop-shadow(3px 4px 6px rgba(0,0,0,.55))}
 /* DOLIUM z jednoho kusu pískovce plave na hladině (bez zrcadlení) */
 /* DOLIUM vytesané do jednoho bloku pískovce, který plave na hladině: nad vodou ostrý, pod vodou ztmavlý a zvlněný */
-.floatword{--B:min(calc(var(--sw) * .30),78vw);position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .075);width:var(--B);height:0;transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity 1.4s}
+.floatword{--B:min(calc(var(--sw) * .40),92vw);position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .075);width:var(--B);height:0;transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity 1.4s}
 .floatword.on{opacity:1}
 .fw-up,.fw-dn{position:absolute;left:-15%;right:-15%;overflow:hidden}
-.fw-up{bottom:0;height:calc(var(--B) * .6)}
+.fw-up{bottom:0;height:calc(var(--B) * .6);filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
 .fw-dn{top:0;height:calc(var(--B) * .2);filter:url(#ripple) brightness(.42) sepia(.5) hue-rotate(55deg) saturate(.8) blur(.6px);opacity:.75;-webkit-mask:linear-gradient(#000 20%,transparent);mask:linear-gradient(#000 20%,transparent)}
 .blok{position:absolute;left:11.54%;width:76.92%;animation:bob 5.5s ease-in-out infinite alternate;transform-origin:50% 100%}
 .fw-up .blok{bottom:calc(var(--B) * -.11)}
@@ -112,7 +112,7 @@ body.lock{overflow:hidden}
 .blok .top{height:calc(var(--B) * .07);background:url(obrazky/t_piskovec-blok.webp) 0 0/auto 100%;filter:brightness(1.18) contrast(.9);clip-path:polygon(5% 0,30% 4%,55% 0,80% 6%,95% 1%,100% 100%,0 100%);box-shadow:inset 0 -2px 0 rgba(255,244,220,.6)}
 .blok .front{position:relative;height:calc(var(--B) * .30);background:linear-gradient(180deg,rgba(255,240,210,.12),rgba(40,25,10,.28)),url(obrazky/t_piskovec-blok.webp) 0 0/auto 100%;clip-path:polygon(0 0,100% 0,99.4% 30%,100% 62%,99.2% 100%,.8% 100%,0 70%,.6% 35%);box-shadow:inset 0 3px 0 rgba(255,244,220,.35),inset 6px 0 10px rgba(255,240,210,.18),inset -10px 0 16px rgba(30,18,6,.4);display:flex;align-items:center;justify-content:center}
 /* písmo vytesané (vpadlé): tmavé dno, světlá spodní hrana, stín pod horní hranou */
-.blok .front span{font-weight:900;letter-spacing:.07em;padding-left:.07em;line-height:1;font-size:calc(var(--B) * .155);margin-top:-.08em;color:rgba(66,46,22,.62);text-shadow:0 -1px 1px rgba(25,14,4,.55),0 1px 0 rgba(255,240,212,.65),0 2px 1px rgba(255,240,212,.25)}
+.blok .front span{font-weight:900;letter-spacing:.07em;padding-left:.07em;line-height:1;font-size:calc(var(--B) * .155);margin-top:-.08em;color:rgba(58,38,16,.78);text-shadow:0 -2px 2px rgba(25,14,4,.6),0 1px 0 rgba(255,240,212,.75),0 2px 1px rgba(255,240,212,.35)}
 @keyframes bob{0%{transform:translateY(0) rotate(-.7deg)}50%{transform:translateY(-3%) rotate(.2deg)}100%{transform:translateY(1.5%) rotate(.8deg)}}
 /* lem pěny a kruhy na vodě kolem bloku */
 .fw-foam{position:absolute;left:6%;right:6%;top:calc(var(--B) * -.012);height:calc(var(--B) * .03);border-radius:50%;background:radial-gradient(ellipse,rgba(240,248,245,.8),rgba(220,235,232,.25) 55%,transparent 72%);filter:blur(1px) url(#ripple);animation:foamb 2.75s ease-in-out infinite alternate}
@@ -237,7 +237,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body class="lock">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <pattern id="stoneD" patternUnits="userSpaceOnUse" width="72" height="24"><image href="obrazky/t_piskovec.svg" width="72" height="24" preserveAspectRatio="none"/></pattern>
+  <pattern id="stoneD" patternUnits="userSpaceOnUse" width="72" height="24"><image href="obrazky/t_piskovec-blok.webp" width="72" height="24" preserveAspectRatio="none"/></pattern>
   <filter id="wave" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence id="turb2" type="fractalNoise" baseFrequency="0.004 0.045" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
   <filter id="ripple"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.006 0.06" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter>
 </svg>
