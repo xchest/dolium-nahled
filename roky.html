@@ -100,10 +100,26 @@ body.lock{overflow:hidden}
 .gatemark{position:absolute;left:55.85%;top:45.5%;opacity:0;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform;pointer-events:none}
 .gatemark svg{display:block;width:min(calc(var(--sw) * .14),34vw);height:min(calc(var(--sw) * .14),34vw);filter:drop-shadow(-1px -1px 0 rgba(255,246,226,.7)) drop-shadow(1px 1px 0 #5e4a31) drop-shadow(2px 2px 0 #4c3b26) drop-shadow(3px 4px 6px rgba(0,0,0,.55))}
 /* DOLIUM z jednoho kusu pískovce plave na hladině (bez zrcadlení) */
-.floatword{position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .02);transform:translate(-50%,-100%);pointer-events:none;opacity:0;transition:opacity 1.4s}
+/* DOLIUM vytesané do jednoho bloku pískovce, který plave na hladině: nad vodou ostrý, pod vodou ztmavlý a zvlněný */
+.floatword{--B:min(calc(var(--sw) * .30),78vw);position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .075);width:var(--B);height:0;transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity 1.4s}
 .floatword.on{opacity:1}
-.floatword span{display:block;transform-origin:50% 100%;transform:perspective(900px) rotateX(52deg);animation:bob 5s ease-in-out infinite alternate;font-weight:900;letter-spacing:.06em;padding-left:.06em;line-height:.9;font-size:min(calc(var(--sw) * .1),16vw);color:transparent;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200'%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0035 .045' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .40 0 0 0 0 .22 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .96 0 0 0 0 .90 0 0 0 0 .78 0 0 0 .7 -.25'/%3E%3C/filter%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='3' seed='2' stitchTiles='stitch' result='t'/%3E%3CfeDiffuseLighting in='t' surfaceScale='1.2' lighting-color='%23fff' result='l'%3E%3CfeDistantLight azimuth='235' elevation='58'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix in='l' values='0 0 0 0 1 0 0 0 0 .96 0 0 0 0 .88 -.45 0 0 0 .45'/%3E%3C/filter%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30 0 0 0 0 .23 0 0 0 0 .14 0 0 0 .6 -.1'/%3E%3C/filter%3E%3Crect width='600' height='200' fill='%23cdb187'/%3E%3Crect width='600' height='200' filter='url%28%23m%29'/%3E%3Crect width='600' height='200' filter='url%28%23b%29'/%3E%3Crect width='600' height='200' filter='url%28%23r%29'/%3E%3Crect width='600' height='200' filter='url%28%23g%29'/%3E%3C/svg%3E") 0 0/6em 2em;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 1px 0 #a88d64) drop-shadow(0 1px 0 #937953) drop-shadow(0 1px 0 #7e6645) drop-shadow(0 1px 0 #6b5539) drop-shadow(0 8px 12px rgba(0,0,0,.5))}
-@keyframes bob{from{transform:perspective(900px) rotateX(52deg) translateY(0) rotate(-.4deg)}to{transform:perspective(900px) rotateX(50deg) translateY(-3%) rotate(.4deg)}}
+.fw-up,.fw-dn{position:absolute;left:-15%;right:-15%;overflow:hidden}
+.fw-up{bottom:0;height:calc(var(--B) * .6)}
+.fw-dn{top:0;height:calc(var(--B) * .2);filter:url(#ripple) brightness(.42) sepia(.5) hue-rotate(55deg) saturate(.8) blur(.6px);opacity:.75;-webkit-mask:linear-gradient(#000 20%,transparent);mask:linear-gradient(#000 20%,transparent)}
+.blok{position:absolute;left:11.54%;width:76.92%;animation:bob 5.5s ease-in-out infinite alternate;transform-origin:50% 100%}
+.fw-up .blok{bottom:calc(var(--B) * -.11)}
+.fw-dn .blok{top:calc(var(--B) * -.26)}
+.blok .top{height:calc(var(--B) * .07);background:url(obrazky/t_piskovec-blok.webp) 0 0/auto 100%;filter:brightness(1.18) contrast(.9);clip-path:polygon(5% 0,30% 4%,55% 0,80% 6%,95% 1%,100% 100%,0 100%);box-shadow:inset 0 -2px 0 rgba(255,244,220,.6)}
+.blok .front{position:relative;height:calc(var(--B) * .30);background:linear-gradient(180deg,rgba(255,240,210,.12),rgba(40,25,10,.28)),url(obrazky/t_piskovec-blok.webp) 0 0/auto 100%;clip-path:polygon(0 0,100% 0,99.4% 30%,100% 62%,99.2% 100%,.8% 100%,0 70%,.6% 35%);box-shadow:inset 0 3px 0 rgba(255,244,220,.35),inset 6px 0 10px rgba(255,240,210,.18),inset -10px 0 16px rgba(30,18,6,.4);display:flex;align-items:center;justify-content:center}
+/* písmo vytesané (vpadlé): tmavé dno, světlá spodní hrana, stín pod horní hranou */
+.blok .front span{font-weight:900;letter-spacing:.07em;padding-left:.07em;line-height:1;font-size:calc(var(--B) * .155);margin-top:-.08em;color:rgba(66,46,22,.62);text-shadow:0 -1px 1px rgba(25,14,4,.55),0 1px 0 rgba(255,240,212,.65),0 2px 1px rgba(255,240,212,.25)}
+@keyframes bob{0%{transform:translateY(0) rotate(-.7deg)}50%{transform:translateY(-3%) rotate(.2deg)}100%{transform:translateY(1.5%) rotate(.8deg)}}
+/* lem pěny a kruhy na vodě kolem bloku */
+.fw-foam{position:absolute;left:6%;right:6%;top:calc(var(--B) * -.012);height:calc(var(--B) * .03);border-radius:50%;background:radial-gradient(ellipse,rgba(240,248,245,.8),rgba(220,235,232,.25) 55%,transparent 72%);filter:blur(1px) url(#ripple);animation:foamb 2.75s ease-in-out infinite alternate}
+@keyframes foamb{to{transform:scaleX(1.05) translateY(20%);opacity:.7}}
+.fw-ring{position:absolute;left:50%;top:0;width:100%;height:calc(var(--B) * .14);border:1.5px solid rgba(225,240,236,.55);border-radius:50%;transform:translate(-50%,-50%) scale(.85);opacity:0;animation:ring 7.5s linear infinite}
+.fw-ring:nth-child(2){animation-delay:-2.5s}.fw-ring:nth-child(3){animation-delay:-5s}
+@keyframes ring{0%{transform:translate(-50%,-50%) scale(.85);opacity:0}12%{opacity:.7}100%{transform:translate(-50%,-50%) scale(1.7);opacity:0}}
 .gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1)}
 .gatemark.on{opacity:1}
 .hero .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,12,10,.5) 0%,rgba(8,12,10,.05) 30%,rgba(8,12,10,0) 55%,rgba(8,12,10,.78) 100%)}
@@ -260,7 +276,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <div class="foam" aria-hidden="true"></div>
     <div class="gatemark" id="gatemark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="url(#stoneD)" fill-rule="evenodd" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/></svg></div>
-    <div class="floatword" id="floatword" aria-hidden="true"><span>DOLIUM</span></div>
+    <div class="floatword" id="floatword" aria-hidden="true"><i class="fw-ring"></i><i class="fw-ring"></i><i class="fw-ring"></i><div class="fw-dn"><div class="blok"><div class="top"></div><div class="front"><span>DOLIUM</span></div></div></div><div class="fw-up"><div class="blok"><div class="top"></div><div class="front"><span>DOLIUM</span></div></div></div><i class="fw-foam"></i></div>
   </div>
   <div class="shade"></div>
   <div class="txt"><div class="wrap">
