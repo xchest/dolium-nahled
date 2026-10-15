@@ -95,41 +95,30 @@ body.lock{overflow:hidden}
   background:radial-gradient(ellipse at 50% 40%,rgba(235,245,242,.75),rgba(200,225,220,.25) 45%,rgba(200,225,220,0) 70%);filter:url(#ripple) blur(1px);animation:foam 1.6s ease-in-out infinite alternate}
 @keyframes foam{to{transform:scaleX(1.12) translateY(4%)}}
 .foam{display:none}
-/* hladina: zrcadlo scény podle čáry vody --w (stoupá po otevření vrat) */
-/* v65: žádný druhý (falešný) odraz — fotka má vodu i odraz. Vlní se jen skutečná voda,
-   ořez = obrys hladiny změřený z fotky (u vrat 59,9 %, vlevo 63 %, vpravo pod lodí 72 %) */
-.mirror{position:absolute;inset:0;filter:url(#ripple);pointer-events:none;
-  clip-path:polygon(0 63.5%,20% 63%,21% 67.5%,33.5% 67.5%,34.5% 62.3%,44.5% 61.2%,45% 59.9%,65.5% 59.9%,66% 61.5%,66% 68%,70% 70%,76% 72%,82.5% 72.5%,79.5% 80%,75.5% 90%,73% 100%,0 100%)}
-.mirror .tint{display:none}
-.mirror .ghost{position:absolute;left:57%;top:26%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35em;
-  color:#e7dcc4;opacity:0;transition:opacity 3s 1.2s;font-weight:600;letter-spacing:.42em;font-size:clamp(24px,3.6vw,58px);padding-left:.42em;mix-blend-mode:screen}
-.mirror .ghost svg{width:2.6em;height:2.6em}
-.layer,.mirror .ghost{display:none}
-/* znak DOLIUM na zavřených vratech (střed vrat x 55,85 %, y 46 %) */
-/* znak D přiletí z intra a zůstane na vratech jako starý bronz s patinou, plochý, 80 % krytí */
-.gatemark{position:absolute;left:55.85%;top:45.5%;opacity:0;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform;pointer-events:none}
+/* v66: voda je jen fotka — žádné vlnění ani pohyb (AP 16. 10.) */
+.layer{display:none}
+/* znak D přiletí z intra a zůstane na vratech jako starý bronz s patinou, plochý, 80 % krytí; D je zvednuté, pod ním DOLIUM */
+.gatemark{position:absolute;left:55.85%;top:43%;opacity:0;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform;pointer-events:none}
 .gatemark svg{position:relative;display:block;width:min(calc(var(--sw) * .093),23vw);height:min(calc(var(--sw) * .093),23vw);overflow:visible;opacity:.8}
-/* DOLIUM z jednoho kusu pískovce plave na hladině (bez zrcadlení) */
-/* DOLIUM vytesané do jednoho bloku pískovce, který plave na hladině: nad vodou ostrý, pod vodou ztmavlý a zvlněný */
-.floatword{position:absolute;left:55.85%;top:calc(var(--w) + var(--sw) * .006);transform:translateX(-50%) perspective(calc(var(--sw) * .6)) rotateX(38deg);transform-origin:50% 0;pointer-events:none;opacity:0;transition:opacity 1.6s;white-space:nowrap}
-.floatword.on{opacity:1}
-.floatword span{display:block;font-weight:700;letter-spacing:.32em;padding-left:.32em;line-height:1;font-size:min(calc(var(--sw) * .062),11vw);color:rgba(240,226,192,.7);mix-blend-mode:screen;filter:url(#refl);-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 3px,rgba(0,0,0,.55) 3px 5px),linear-gradient(180deg,#000 40%,rgba(0,0,0,.6));mask-image:repeating-linear-gradient(180deg,#000 0 3px,rgba(0,0,0,.55) 3px 5px);transform:scaleY(1.12)}
+/* DOLIUM svisle na vratech pod D, stejný bronz; pod čarou vody (59,9 %) jeho statický odraz */
+.gateword{position:absolute;left:55.85%;width:calc(var(--sw) * .16);aspect-ratio:300/40;pointer-events:none;opacity:0;transition:opacity 1.6s}
+.gateword svg{display:block;width:100%;height:100%;overflow:visible}
+.gateword.up{top:58.4%;transform:translate(-50%,-100%)}
+.gateword.down{top:61.4%;transform:translateX(-50%) scaleY(-1);filter:blur(.6px);
+  -webkit-mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%);mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%)}
+.gateword.on.up{opacity:.8}.gateword.on.down{opacity:.6}
 .gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1)}
 .gatemark.on{opacity:1}
 .gatemark::after{content:"";position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 38%,rgba(255,252,240,.95) 50%,transparent 62%) 160% 0/300% 100% no-repeat;mix-blend-mode:plus-lighter;opacity:0}
 .gatemark.lit::after{animation:sweep 1.2s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes sweep{0%{opacity:1;background-position:160% 0}85%{opacity:1}100%{opacity:0;background-position:-60% 0}}
 .hero .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,12,10,.5) 0%,rgba(8,12,10,.05) 30%,rgba(8,12,10,0) 55%,rgba(8,12,10,.78) 100%)}
-.hero .txt{position:absolute;left:var(--gx,50%);width:min(92vw,720px);bottom:84px;z-index:4;text-align:center;filter:url(#wave) blur(.25px);transform:translateX(-50%) perspective(900px) rotateX(24deg);transform-origin:50% 100%;opacity:.92}
+.hero .txt{position:absolute;left:var(--gx,50%);width:min(92vw,720px);bottom:84px;z-index:4;text-align:center;transform:translateX(-50%) perspective(900px) rotateX(30deg);transform-origin:50% 100%;opacity:.92}
 .hero .txt .wrap{display:flex;flex-direction:column;align-items:center}
 .hero .eyebrow{display:none}
 .hero .eyebrow{color:#d7cbb3}
 .hero h1{font-size:clamp(26px,3.3vw,52px);font-weight:400;color:rgba(255,255,255,.82);max-width:none;line-height:1.08;text-shadow:0 2px 16px rgba(0,0,0,.4)}
 .hero h1 .serif{color:inherit}
-/* vlna běží písmeny zleva doprava */
-.wv{display:inline-block;white-space:pre;animation:wv 2.8s ease-in-out infinite;animation-delay:calc(var(--i) * -.11s)}
-@keyframes wv{0%,100%{transform:translateY(-.15em) rotate(-3deg)}50%{transform:translateY(.15em) rotate(3deg)}}
-.floatword i{display:inline-block;font-style:normal;animation:wv 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.45s)}
 .hero p{max-width:620px;color:rgba(255,255,255,.72);font-size:clamp(15px,1.3vw,18px);margin:16px 0 0;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .hero .cap{display:none}
 .rise{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
@@ -293,14 +282,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="scene" id="scene">
     <img src="obrazky/w_komora-1600.webp" alt="Plavební komora Hořín po rekonstrukci">
     <div class="layer" id="lay" aria-hidden="true"><div class="behind"><div class="fall"></div></div><div class="leaf l"></div><div class="leaf r"></div></div>
-    <div class="mirror" id="mirror" aria-hidden="true">
-      <img src="obrazky/w_komora-1600.webp" alt="">
-      <div class="tint"></div>
-      <div class="ghost"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 8h11c9.5 0 15 6.2 15 16s-5.5 16-15 16H12z"/><path d="M20 8v32"/></svg><span>DOLIUM</span></div>
-    </div>
-    <div class="foam" aria-hidden="true"></div>
     <div class="gatemark" id="gatemark" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#6e4e2c" filter="url(#pat)" fill-rule="evenodd" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/></svg></div>
-    <div class="floatword" id="floatword" aria-hidden="true"><span><i style="--i:0">D</i><i style="--i:1">O</i><i style="--i:2">L</i><i style="--i:3">I</i><i style="--i:4">U</i><i style="--i:5">M</i></span></div>
+    <div class="gateword up" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#6e4e2c" filter="url(#pat)">DOLIUM</text></svg></div>
+    <div class="gateword down" aria-hidden="true"><svg viewBox="0 0 300 40"><text x="150" y="39" text-anchor="middle" textLength="296" lengthAdjust="spacing" font-size="54" font-weight="700" fill="#6e4e2c" filter="url(#pat)">DOLIUM</text></svg></div>
   </div>
   <div class="shade"></div>
   <div class="txt"><div class="wrap">
@@ -397,7 +381,6 @@ if (hero.dataset.video) {
   const v = Object.assign(document.createElement('video'), {muted:true, loop:true, autoplay:true, playsInline:true, src:hero.dataset.video});
   v.addEventListener('canplay', () => hero.prepend(v), {once:true});
 }
-$('#mirror').insertBefore($('#lay').cloneNode(true), $('#mirror .tint')).removeAttribute('id');
 function fitScene() { // cover jako object-fit, ale vrata (střed 55,8 %) drží uprostřed obrazovky
   const w = hero.clientWidth, h = hero.clientHeight, a = 1434 / 938;
   const W = Math.max(w, h * a), H = W / a;
@@ -412,8 +395,7 @@ const openHero = () => setTimeout(() => hero.classList.add('open'), 350);
 
 /* intro s logem — po něm se otevřou vrata */
 const intro = $('#intro');
-const gm = $('#gatemark'), fw = $('#floatword');
-{ let n = 0; const wrap = el => [...el.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); [...c.textContent].forEach(ch => { const x = document.createElement('span'); x.className = 'wv'; x.style.setProperty('--i', n++); x.textContent = ch; f.appendChild(x); }); c.replaceWith(f); } else wrap(c); }); wrap($('.hero h1')); }
+const gm = $('#gatemark'), gw = document.querySelectorAll('.gateword'), gwOn = () => gw.forEach(e => e.classList.add('on'));
 function endIntro() { // znak z intra se zvětší a přesune na zavřená vrata
   if (!intro.isConnected || intro.dataset.done) return; intro.dataset.done = 1;
   scrollTo(0, 0);
@@ -423,21 +405,12 @@ function endIntro() { // znak z intra se zvětší a přesune na zavřená vrata
   gm.classList.add('on'); intro.classList.add('out');
   setTimeout(() => gm.classList.add('lit'), 1750);
   requestAnimationFrame(() => requestAnimationFrame(() => { gm.classList.add('fly'); gm.style.transform = ''; }));
-  setTimeout(() => fw.classList.add('on'), 1600);
+  setTimeout(gwOn, 1600);
   document.body.classList.remove('lock'); openHero();
   setTimeout(() => intro.remove(), 2400);
 }
-if (RM) { intro.remove(); document.body.classList.remove('lock'); gm.classList.add('on'); fw.classList.add('on'); hero.classList.add('open'); }
+if (RM) { intro.remove(); document.body.classList.remove('lock'); gm.classList.add('on'); gwOn(); hero.classList.add('open'); }
 else { setTimeout(endIntro, 2600); intro.onclick = endIntro; }
-if (!RM) { // vlnění hladiny
-  const t = $('#turb'), t2 = $('#turb2'), t3 = $('#turb3'), tx = $('.hero .txt'); let k = 0;
-  (function wave(){ k += .012; t.setAttribute('baseFrequency', `${.006 + Math.sin(k)*.0015} ${.06 + Math.cos(k*.8)*.012}`); t2.setAttribute('baseFrequency', `${.004 + Math.sin(k*.7)*.001} ${.045 + Math.cos(k*.6)*.008}`); t3.setAttribute('baseFrequency', `0.0015 ${.11 + Math.sin(k*.9)*.015}`);
-    // houpání na vlnách: zdvih + náklon, DOLIUM a text každý v jiné fázi vlny
-    const sw = scene.clientWidth;
-    fw.style.transform = `translateX(-50%) translateY(${(Math.sin(k*2.2)*sw*.0045).toFixed(2)}px) perspective(${sw*.6}px) rotateX(38deg) rotate(${(Math.sin(k*1.5+1)*1.4).toFixed(2)}deg)`;
-    tx.style.transform = `translateX(-50%) translateY(${(Math.sin(k*2.2-1.6)*7).toFixed(2)}px) perspective(900px) rotateX(24deg) rotate(${(Math.sin(k*1.5-.6)*1.1).toFixed(2)}deg)`;
-    requestAnimationFrame(wave); })();
-}
 
 /* header */
 const hdr = $('#hdr');
