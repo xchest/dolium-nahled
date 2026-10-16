@@ -53,6 +53,11 @@ nav a:hover{opacity:1}
 .intro.out .mark>svg{visibility:hidden}
 .intro.out .word{opacity:0;transition:opacity .5s}
 .intro.out .tag,.intro.out .skip{opacity:0;transition:opacity .3s}
+/* v69: nejdřív zmizí text intra, pak pozadí; obrysové D se prolne do bronzového za letu (nic z intra nezůstane přes fotku) */
+.intro.out .word,.intro.out .tag,.intro.out .skip{opacity:0;transition:opacity .3s}
+.intro.out .tag{animation:fadeout .3s forwards}@keyframes fadeout{from{opacity:1}to{opacity:0}}
+.intro.out .drainw{opacity:0;transition:opacity .9s ease .3s}
+.intro.out .mark>svg{visibility:visible;opacity:0;transition:opacity .45s}
 .intro .mark{display:flex;flex-direction:column;align-items:center;gap:22px}
 .intro svg{width:96px;height:96px}
 .intro .d1{stroke-dasharray:120;stroke-dashoffset:120;animation:draw 1.1s .15s var(--ease) forwards}
@@ -107,7 +112,7 @@ body.lock{overflow:hidden}
 .gateword.down{top:61.4%;transform:translateX(-50%) scaleY(-1);filter:blur(.6px);
   -webkit-mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%);mask-image:linear-gradient(0deg,#000,rgba(0,0,0,.25) 100%)}
 .gateword.on.up{opacity:.97}.gateword.on.down{opacity:.66}
-.gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1)}
+.gatemark.fly{transition:transform 1.7s cubic-bezier(.65,0,.25,1),opacity .6s}
 .gatemark.on{opacity:1}
 .gatemark::after{content:"";position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill-rule='evenodd' d='M7%205h16c12%200%2019%207.6%2019%2019s-7%2019-19%2019H7zM18%2013h4.5c7%200%2010.5%204%2010.5%2011s-3.5%2011-10.5%2011H18z'/%3E%3C/svg%3E") center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 38%,rgba(255,252,240,.95) 50%,transparent 62%) 160% 0/300% 100% no-repeat;mix-blend-mode:plus-lighter;opacity:0}
 .gatemark.lit::after{animation:sweep 1.2s cubic-bezier(.4,0,.2,1) forwards}
@@ -142,7 +147,8 @@ body.lock{overflow:hidden}
 .odo{display:flex;font-family:Fraunces,Georgia,serif;font-size:clamp(96px,14vw,210px);line-height:1;height:1em;overflow:hidden;letter-spacing:-.02em}
 .odo .d{height:1em;overflow:hidden;width:.62em;text-align:center}
 .odo .d span{display:block;transition:transform .32s cubic-bezier(.3,.7,.2,1)}
-.odo.fast .d span{transition-duration:.06s;transition-timing-function:linear}
+.odo.fast .d span{transition-duration:var(--td,.06s);transition-timing-function:linear}
+#roky.spin .card{transition:opacity var(--td,.06s),transform var(--td,.06s)}#roky.spin .card img{transition:none}
 .odo .d i{display:block;font-style:normal;height:1em}
 .counter small{margin-top:16px;font-size:15px;letter-spacing:.16em;color:#c9b48a;text-transform:uppercase;text-align:center}
 .counter small b{color:#fff;font-weight:600}
@@ -413,9 +419,9 @@ function endIntro() { // znak z intra se zvětší a přesune na zavřená vrata
   const a = $('#intro .mark>svg').getBoundingClientRect(), b = gm.querySelector('svg').getBoundingClientRect();
   const k = a.width / b.width, dx = a.left + a.width / 2 - (b.left + b.width / 2), dy = a.top + a.height / 2 - (b.top + b.height / 2);
   gm.style.transform = `translate(-50%,-50%) translate(${dx}px,${dy}px) scale(${k})`;
-  gm.classList.add('on'); intro.classList.add('out');
+  intro.classList.add('out');
   setTimeout(() => gm.classList.add('lit'), 1750);
-  requestAnimationFrame(() => requestAnimationFrame(() => { gm.classList.add('fly'); gm.style.transform = ''; }));
+  requestAnimationFrame(() => requestAnimationFrame(() => { gm.classList.add('fly', 'on'); gm.style.transform = ''; }));
   setTimeout(gwOn, 1600);
   document.body.classList.remove('lock'); openHero();
   setTimeout(() => intro.remove(), 2400);
@@ -430,7 +436,7 @@ const onHdr = () => hdr.classList.toggle('solid', scrollY > innerHeight * .6);
 /* počítadlo let */
 const REF = window.REFS, RY = Object.fromEntries(window.ROKY.map(r => [r.y, r]));
 const PH = {2026:'Rezidence Turbová', 2023:'Rekonstrukce Palác Dunaj Národní třída Praha 1', 2020:'Rekonstrukce PK Hořín'}; // rok bez vlastní fotky → hlavní stavba roku
-const OWN = {'Rezidence Turbová':'w_fas2', 'Rekonstrukce PK Hořín':'w_komora'}; // naše fotka stavby má přednost
+const OWN = {'Rezidence Turbová':'w_turbova', 'Rekonstrukce PK Hořín':'w_komora'}; // naše fotka stavby má přednost
 const KN = Object.fromEntries(window.ROKY.map(r => [r.n, r])); // fotka patří stavbě, ne roku → stejná stavba = stejná fotka
 const span = y => { const m = String(y).match(/(\d{4})\D*(\d{1,4})?/), a = +m[1]; return [a, m[2] ? +(String(a).slice(0, 4 - m[2].length) + m[2]) : a]; };
 REF.forEach(r => [r.a, r.b] = span(r.y));
@@ -458,7 +464,7 @@ const cards = [$('#cA'), $('#cB')]; let cur = -1, flip = 0;
 const mob = matchMedia('(max-width:860px)'), drum = $('#drum');
 drum.firstChild.innerHTML = R.map(r => `<li>${r.y}</li>`).join('');
 const dli = [...drum.querySelectorAll('li')]; let drumSync = false;
-function drumTo(i) { if (!mob.matches) return; drumSync = true; drum.scrollTo({top: i * dli[0].offsetHeight, behavior: RM ? 'auto' : 'smooth'}); clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 650); }
+function drumTo(i) { if (!mob.matches) return; drumSync = true; drum.scrollTo({top: i * dli[0].offsetHeight, behavior: RM || spinOn ? 'auto' : 'smooth'}); clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 650); }
 R.forEach(r => { const i = new Image(); i.src = img(r.f, 800); });
 
 function cardHTML(r) {
@@ -515,29 +521,28 @@ ctr.addEventListener('keydown', e => {
   if (d) { e.preventDefault(); step(d); }
 });
 ticks.forEach((t, k) => t.onclick = () => show(k));
-/* příjezd do sekce: roky se samy protočí 2026 → nejstarší → zpět 2026 (jen ručičky, karty stojí) */
+/* příjezd do sekce: roky se samy protočí 2026 → nejstarší → zpět 2026 i s referencemi a fotkami */
 let spinOn = false;
-function paint(i) {
-  [...R[i].y].forEach((d, k) => digs[k].style.transform = `translateY(-${d}em)`);
-  ticks.forEach((t, k) => t.classList.toggle('on', k === i)); dli.forEach((li, k) => li.classList.toggle('on', k === i));
-  if (mob.matches) { drumSync = true; drum.scrollTop = i * dli[0].offsetHeight; }
-}
+const rk = $('#roky');
 function stopSpin(e) {
   if (!spinOn || (e && e.type === 'wheel' && performance.now() - spin.at < 1300)) return; // doznívající kolečko z příjezdu točení nezastaví
-  spinOn = false; clearTimeout(spin.t); odo.classList.remove('fast'); paint(cur);
+  spinOn = false; clearTimeout(spin.t); odo.classList.remove('fast'); rk.classList.remove('spin');
   clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 150);
 }
 function spin() {
   if (RM || spinOn) return; if (cur !== 0) show(0);
-  spinOn = true; spin.at = performance.now(); odo.classList.add('fast');
+  spinOn = true; spin.at = performance.now(); odo.classList.add('fast'); rk.classList.add('spin');
   const seq = [...R.keys(), ...[...R.keys()].reverse().slice(1)]; let k = 0;
   const tick = () => {
-    if (!spinOn) return; const i = seq[k++]; paint(i);
+    if (!spinOn) return; const i = seq[k++];
+    // dolů: pomalu, rychleji, rychleji, rychle — na nejstarším roce náraz a krátké stání — zpět rychle
+    const d = k < N ? 70 + 680 * (1 - k / N) ** 2.4 : k === N ? 900 : 70;
+    const td = Math.min(d * .7, 380) / 1000 + 's'; odo.style.setProperty('--td', td); rk.style.setProperty('--td', td);
+    show(i);
     if (k >= seq.length) { stopSpin(); return; }
-    // dolů tut-tut-tut se zpomalením, na nejstarším roce „tum", zpět rychle
-    spin.t = setTimeout(tick, k < N ? 70 + 90 * (k / N) ** 3 : k === N ? 520 : 38);
+    spin.t = setTimeout(tick, d);
   };
-  spin.t = setTimeout(tick, 250);
+  spin.t = setTimeout(tick, 600);
 }
 ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => $('#roky').addEventListener(ev, stopSpin, {capture:true, passive:true}));
 let rokyIn = false;
