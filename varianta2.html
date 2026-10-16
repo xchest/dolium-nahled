@@ -497,7 +497,9 @@ function runLines() {
   const tmp = document.createElementNS(NS, 'path'); mk.appendChild(tmp);
   const len = d => { tmp.setAttribute('d', d); return tmp.getTotalLength(); };
   const draw = (svg, list) => list.forEach(([sx, sy, d, dl]) => {
-    const full = `M${sx} ${sy} L` + d.replace(/^M\s*/, ''), lg = len(d), ld = len(full) - lg;
+    // Z by uzavřel cestu až do startu mimo obraz (linka by tvar přejela a zmizela) → uzavřít na první bod tvaru
+    const p0 = d.match(/^M\s*([-\d.]+)[\s,]+([-\d.]+)/), dd = d.replace(/\s*Z\s*$/i, ` L${p0[1]} ${p0[2]}`);
+    const full = `M${sx} ${sy} L` + dd.replace(/^M\s*/, ''), lg = len(d), ld = len(full) - lg;
     const p = document.createElementNS(NS, 'path'); p.setAttribute('d', full); p.style.strokeDasharray = `${lg} 100000`;
     svg.querySelector('.ls').appendChild(p);
     p.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -ld }], { duration: 1000, delay: dl, easing: 'cubic-bezier(.2,.75,.2,1)', fill: 'both' });
