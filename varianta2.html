@@ -317,6 +317,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 #lwd .ls path{stroke-linecap:square}
 .lin .lf{opacity:0}
 .intro .skip{z-index:3}
+/* v82: život nad hladinou — každých ~6 s přeletí pod nápisem dva ptáci, střídavě se na vodě rozběhnou kruhy jako po rybě */
+.fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bird{position:absolute;left:0;width:3.3%;min-width:26px;aspect-ratio:2/1;animation:bfly 7s linear forwards}
+.bird svg{display:block;width:100%;height:100%;overflow:visible;animation:bflap .34s ease-in-out infinite alternate;transform-origin:50% 60%}
+.bird path{fill:#1c2420;stroke:#1c2420;stroke-width:.5;stroke-linejoin:round}
+@keyframes bflap{from{transform:scaleY(1)}to{transform:scaleY(.35) translateY(2px)}}
+@keyframes bfly{0%{transform:translate(-3vw,0)}25%{transform:translate(25vw,-6px)}50%{transform:translate(50vw,3px)}75%{transform:translate(75vw,-4px)}100%{transform:translate(103vw,2px)}}
+@keyframes bflyR{0%{transform:translate(3vw,0)}25%{transform:translate(-25vw,-6px)}50%{transform:translate(-50vw,3px)}75%{transform:translate(-75vw,-4px)}100%{transform:translate(-103vw,2px)}}
+.rip{position:absolute;width:9%;aspect-ratio:1;margin:-4.5% 0 0 -4.5%;transform:scaleY(.22)}
+.rip i{position:absolute;inset:0;border:2px solid rgba(232,240,236,.7);border-radius:50%;opacity:0;animation:ripw 3.2s ease-out forwards}
+.rip i:nth-child(2){animation-delay:.45s}.rip i:nth-child(3){animation-delay:.9s}
+@keyframes ripw{0%{transform:scale(.05);opacity:0}12%{opacity:.9}100%{transform:scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fx{display:none}}
 #icv{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
 .gaterefl{position:absolute;left:55.85%;top:70%;opacity:0;transform:translateX(-50%) scaleY(-1);pointer-events:none;transition:opacity 1.8s;
   filter:url(#ripple) blur(.5px) brightness(.78);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.08),#000 80%);mask-image:linear-gradient(180deg,rgba(0,0,0,.08),#000 80%)}
@@ -364,6 +377,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="scene" id="scene">
     <img src="obrazky/w_komora-1600.webp" alt="Plavební komora Hořín po rekonstrukci">
     <div class="dmk" aria-hidden="true"><img class="dw" src="obrazky/d_word.webp" alt=""><div class="dmr"><img src="obrazky/d_mark_r.webp" alt=""></div></div>
+      <div class="fx" id="fx" aria-hidden="true"></div>
     <div class="layer" id="lay" aria-hidden="true"><div class="behind"><div class="fall"></div></div><div class="leaf l"></div><div class="leaf r"></div></div>
     <div class="gatemark" id="gatemark" aria-hidden="true"><svg viewBox="-7 -7 114 131"><rect x="-6" y="-6" width="112" height="129" rx="1.6" fill="url(#gSteel)"/><rect x="-6" y="-6" width="112" height="129" rx="1.6" fill="none" stroke="rgba(255,255,255,.18)" stroke-width=".4"/><g fill="url(#gBolt)"><circle cx="-3" cy="-3" r="1.3"/><circle cx="103" cy="-3" r="1.3"/><circle cx="-3" cy="120" r="1.3"/><circle cx="103" cy="120" r="1.3"/></g><g filter="url(#gblok)"><rect width="100" height="95" fill="url(#mV)"/><path fill="url(#mW)" filter="url(#inlay)" d="M20 14.6h22.6v67.2H20zM50 14.6h6c12 0 20.3 14 20.3 33.6S68 81.8 56 81.8h-6z"/><rect y="95" width="100" height="22" fill="url(#mW)"/><text x="50" y="113.3" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs" font-family="Inter Tight,Helvetica,Arial,sans-serif" font-size="20.5" font-weight="500" fill="url(#mV)">DOLIUM</text></g><rect x="-6" y="-6" width="112" height="129" rx="1.6" fill="url(#gLight)"/></svg></div>
     <div class="gateword up" aria-hidden="true"><svg viewBox="0 0 100 22"><g filter="url(#hon)"><rect width="100" height="22" fill="url(#mW)"/><text x="50" y="18.3" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs" font-family="Inter Tight,Helvetica,Arial,sans-serif" font-size="20.5" font-weight="500" fill="url(#mV)">DOLIUM</text></g></svg></div>
@@ -571,6 +585,32 @@ function runSmash() {
   size(); addEventListener('resize', size);
   Promise.all(ph.map(im => im.decode ? im.decode().catch(() => {}) : 0)).finally(() => { build(); requestAnimationFrame(loop); });
 }
+/* v82: ptáci a kruhy na vodě */
+(function lifeFx() {
+  const fx = $('#fx'); if (!fx || RM) return;
+  const W = 'M0 3.2 Q4.5 -.6 10 5 Q15.5 -.6 20 3.2 Q15 1.6 10 7.2 Q5 1.6 0 3.2Z';
+  const birds = () => {
+    if (document.hidden) return;
+    const top = 51 + Math.random() * 4, dir = Math.random() < .5;
+    [[0, 0], [.55 + Math.random() * .3, 1.4 + Math.random()]].forEach(([dl, dy], k) => {
+      const b = document.createElement('div'); b.className = 'bird';
+      b.style.top = (top + dy) + '%'; b.style.animationDelay = dl + 's';
+      if (dir) b.style.cssText += ';left:auto;right:0;animation-name:bflyR';
+      if (k) b.style.width = '2.7%';
+      b.innerHTML = `<svg viewBox="0 0 20 10"><path d="${W}"/></svg>`;
+      b.firstChild.style.animationDelay = (-Math.random() * .3) + 's';
+      fx.appendChild(b); setTimeout(() => b.remove(), 8500);
+    });
+  };
+  const ripple = () => {
+    if (document.hidden) return;
+    const r = document.createElement('div'); r.className = 'rip';
+    r.style.left = (38 + Math.random() * 26) + '%'; r.style.top = (63 + Math.random() * 10) + '%';
+    r.innerHTML = '<i></i><i></i><i></i>'; fx.appendChild(r); setTimeout(() => r.remove(), 4500);
+  };
+  setTimeout(() => { birds(); setInterval(birds, 6000); }, 2500);
+  setTimeout(() => { ripple(); setInterval(ripple, 6000); }, 5500);
+})();
 /* v78: intro vypnuto (AP 16. 10.: nedává smysl) — stránka začíná rovnou úvodní fotkou; runSmash ponechán, zapne se přidáním ?intro do URL */
 /* v81: intro z linek zapnuto (AP 16. 10.); vypne ho ?nointro */
 const INTRO_ON = !/[?&]nointro\b/.test(location.search);
