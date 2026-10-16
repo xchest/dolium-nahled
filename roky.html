@@ -142,6 +142,7 @@ body.lock{overflow:hidden}
 .odo{display:flex;font-family:Fraunces,Georgia,serif;font-size:clamp(96px,14vw,210px);line-height:1;height:1em;overflow:hidden;letter-spacing:-.02em}
 .odo .d{height:1em;overflow:hidden;width:.62em;text-align:center}
 .odo .d span{display:block;transition:transform .32s cubic-bezier(.3,.7,.2,1)}
+.odo.fast .d span{transition-duration:.06s;transition-timing-function:linear}
 .odo .d i{display:block;font-style:normal;height:1em}
 .counter small{margin-top:16px;font-size:15px;letter-spacing:.16em;color:#c9b48a;text-transform:uppercase;text-align:center}
 .counter small b{color:#fff;font-weight:600}
@@ -428,8 +429,9 @@ const onHdr = () => hdr.classList.toggle('solid', scrollY > innerHeight * .6);
 
 /* počítadlo let */
 const REF = window.REFS, RY = Object.fromEntries(window.ROKY.map(r => [r.y, r]));
-const PH = {2026:['w_fas2','Rezidence Turbová','montáž kamenné fasády'], 2023:['r02','Rekonstrukce Palác Dunaj Národní třída Praha 1','schodiště — travertin'], 2020:['w_komora','Rekonstrukce PK Hořín','kvádrové zdivo plavební komory']}; // roky bez fotky dané stavby → ilustrační foto z naší galerie
-const OV = {2025:['r00','schodiště a obklady — travertin'], 2021:['r12','obklad mostního pilíře — žula'], 2016:['r11','obklad mostního pilíře — žula']}; // slabá / nevysvětlující fotka roku → vysvětlující detail z galerie
+const PH = {2026:'Rezidence Turbová', 2023:'Rekonstrukce Palác Dunaj Národní třída Praha 1', 2020:'Rekonstrukce PK Hořín'}; // rok bez vlastní fotky → hlavní stavba roku
+const OWN = {'Rezidence Turbová':'w_fas2', 'Rekonstrukce PK Hořín':'w_komora'}; // naše fotka stavby má přednost
+const KN = Object.fromEntries(window.ROKY.map(r => [r.n, r])); // fotka patří stavbě, ne roku → stejná stavba = stejná fotka
 const span = y => { const m = String(y).match(/(\d{4})\D*(\d{1,4})?/), a = +m[1]; return [a, m[2] ? +(String(a).slice(0, 4 - m[2].length) + m[2]) : a]; };
 REF.forEach(r => [r.a, r.b] = span(r.y));
 // každá stavba má jeden rok: rok své fotky, jinak nejméně obsazený rok svého rozsahu; prázdný rok doplní stavba, která v něm ještě běžela
@@ -440,10 +442,10 @@ for (let Y = Math.max(...REF.map(r => r.b)); Y >= Math.min(...REF.map(r => r.a))
   let it = REF.filter(r => r.h === Y); if (!it.length) it = REF.filter(r => r.a <= Y && Y <= r.b);
   it = it.sort((p, q) => (q.a === Y) - (p.a === Y));
   if (!it.length) continue;
-  const k = RY[Y], ph = PH[Y], top = k ? it.find(r => r.n === k.n) : ph ? it.find(r => r.n === ph[1]) : null;
+  const k = RY[Y], top = it.find(r => r.n === (k ? k.n : PH[Y]));
   const f = top || it[0];
-  const ov = OV[Y];
-  R.push({y: String(Y), f: ov ? ov[0] : k ? k.f : ph ? ph[0] : 'r04', ok: !ov && k && k.ok, lic: k && k.lic, cap: ov ? ov[1] : !k && ph ? ph[2] : '', n: f.n, o: f.o, p: k ? k.p : f.p, l: f.y, it: it.filter(r => r !== f), cnt: it.length, nov: it.filter(r => r.a === Y).length});
+  const kn = KN[f.n], own = OWN[f.n];
+  R.push({y: String(Y), f: own || (kn ? kn.f : 'r04'), ok: !own && kn && kn.ok, lic: kn && kn.lic, cap: '', n: f.n, o: f.o, p: k ? k.p : f.p, l: f.y, it: it.filter(r => r !== f), cnt: it.length, nov: it.filter(r => r.a === Y).length});
 }
 const N = R.length, pl = n => n === 1 ? 'stavba' : n < 5 ? 'stavby' : 'staveb';
 $('#rintro').textContent = `Reference · ${R[0].y} → ${R[N - 1].y} · ${REF.length} staveb`;
@@ -485,6 +487,7 @@ const step = d => { const i = Math.max(0, Math.min(N - 1, cur + d)); if (i === c
 ctr.addEventListener('wheel', e => {
   const d = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
   const dir = Math.sign(d);
+  if (spinOn) { e.preventDefault(); return; }
   if ((dir > 0 && cur === N - 1) || (dir < 0 && cur === 0)) { acc = 0; return; } // na konci pustí stránku dál
   e.preventDefault();
   // jeden rok na gesto: gesto = série eventů bez 250ms ticha; krok jen jednou na gesto, setrvačnost touchpadu se zahodí
@@ -512,6 +515,36 @@ ctr.addEventListener('keydown', e => {
   if (d) { e.preventDefault(); step(d); }
 });
 ticks.forEach((t, k) => t.onclick = () => show(k));
+/* příjezd do sekce: roky se samy protočí 2026 → nejstarší → zpět 2026 (jen ručičky, karty stojí) */
+let spinOn = false;
+function paint(i) {
+  [...R[i].y].forEach((d, k) => digs[k].style.transform = `translateY(-${d}em)`);
+  ticks.forEach((t, k) => t.classList.toggle('on', k === i)); dli.forEach((li, k) => li.classList.toggle('on', k === i));
+  if (mob.matches) { drumSync = true; drum.scrollTop = i * dli[0].offsetHeight; }
+}
+function stopSpin(e) {
+  if (!spinOn || (e && e.type === 'wheel' && performance.now() - spin.at < 1300)) return; // doznívající kolečko z příjezdu točení nezastaví
+  spinOn = false; clearTimeout(spin.t); odo.classList.remove('fast'); paint(cur);
+  clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 150);
+}
+function spin() {
+  if (RM || spinOn) return; if (cur !== 0) show(0);
+  spinOn = true; spin.at = performance.now(); odo.classList.add('fast');
+  const seq = [...R.keys(), ...[...R.keys()].reverse().slice(1)]; let k = 0;
+  const tick = () => {
+    if (!spinOn) return; const i = seq[k++]; paint(i);
+    if (k >= seq.length) { stopSpin(); return; }
+    // dolů tut-tut-tut se zpomalením, na nejstarším roce „tum", zpět rychle
+    spin.t = setTimeout(tick, k < N ? 70 + 90 * (k / N) ** 3 : k === N ? 520 : 38);
+  };
+  spin.t = setTimeout(tick, 250);
+}
+['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => $('#roky').addEventListener(ev, stopSpin, {capture:true, passive:true}));
+let rokyIn = false;
+new IntersectionObserver(es => es.forEach(e => {
+  const now = e.intersectionRatio > .6;
+  if (now && !rokyIn) spin(); if (!now) stopSpin(); rokyIn = now;
+}), {threshold:[0, .6, .61]}).observe($('#roky'));
 if (matchMedia('(hover:none)').matches) $('#rhint').textContent = mob.matches ? 'točte palcem · fotku táhněte do strany' : 'táhněte prstem po letopočtu';
 show(0);
 
