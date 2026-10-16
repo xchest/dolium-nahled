@@ -319,10 +319,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .intro .skip{z-index:3}
 /* v82: život nad hladinou — každých ~6 s přeletí pod nápisem dva ptáci, střídavě se na vodě rozběhnou kruhy jako po rybě */
 .fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.bird{position:absolute;left:0;width:3.3%;min-width:26px;aspect-ratio:2/1;animation:bfly 7s linear forwards}
-.bird svg{display:block;width:100%;height:100%;overflow:visible;animation:bflap .34s ease-in-out infinite alternate;transform-origin:50% 60%}
-.bird path{fill:#1c2420;stroke:#1c2420;stroke-width:.5;stroke-linejoin:round}
-@keyframes bflap{from{transform:scaleY(1)}to{transform:scaleY(.35) translateY(2px)}}
+.bird{position:absolute;right:0;width:3%;min-width:24px;aspect-ratio:5/3;animation:bflyR 7.5s linear forwards}
+.bird svg{display:block;width:100%;height:100%;overflow:visible}
+.bird svg *{fill:#1b211f}.bird .fw{fill:#2c3431}
 @keyframes bfly{0%{transform:translate(-3vw,0)}25%{transform:translate(25vw,-6px)}50%{transform:translate(50vw,3px)}75%{transform:translate(75vw,-4px)}100%{transform:translate(103vw,2px)}}
 @keyframes bflyR{0%{transform:translate(3vw,0)}25%{transform:translate(-25vw,-6px)}50%{transform:translate(-50vw,3px)}75%{transform:translate(-75vw,-4px)}100%{transform:translate(-103vw,2px)}}
 .rip{position:absolute;width:9%;aspect-ratio:1;margin:-4.5% 0 0 -4.5%;transform:scaleY(.22)}
@@ -588,17 +587,18 @@ function runSmash() {
 /* v82: ptáci a kruhy na vodě */
 (function lifeFx() {
   const fx = $('#fx'); if (!fx || RM) return;
-  const W = 'M0 3.2 Q4.5 -.6 10 5 Q15.5 -.6 20 3.2 Q15 1.6 10 7.2 Q5 1.6 0 3.2Z';
+  /* pták z profilu, hlava vlevo (letí zprava doleva); křídla mávají přes SMIL — nahoru, rozpětí, dolů */
+  const WU = 'M16.5 11.4 Q18.5 4 24.5 -2.5 Q24.2 4.5 22.5 11.6Z', WM = 'M16.5 11.6 Q22 9.6 30.5 8.6 Q26 11 22.5 12.2Z', WD = 'M16.5 12.6 Q18.5 19 23.5 25.5 Q23.6 19 22.5 12.6Z';
+  const wing = (cls, dur, beg) => `<path class="${cls}" d="${WU}"><animate attributeName="d" values="${WU};${WM};${WD};${WM};${WU}" keyTimes="0;.3;.55;.8;1" dur="${dur}s" begin="${beg}s" repeatCount="indefinite"/></path>`;
   const birds = () => {
     if (document.hidden) return;
-    const top = 51 + Math.random() * 4, dir = Math.random() < .5;
+    const top = 50 + Math.random() * 4;
     [[0, 0], [.55 + Math.random() * .3, 1.4 + Math.random()]].forEach(([dl, dy], k) => {
       const b = document.createElement('div'); b.className = 'bird';
       b.style.top = (top + dy) + '%'; b.style.animationDelay = dl + 's';
-      if (dir) b.style.cssText += ';left:auto;right:0;animation-name:bflyR';
       if (k) b.style.width = '2.7%';
-      b.innerHTML = `<svg viewBox="0 0 20 10"><path d="${W}"/></svg>`;
-      b.firstChild.style.animationDelay = (-Math.random() * .3) + 's';
+      const dur = .42 + Math.random() * .1, beg = -Math.random();
+      b.innerHTML = `<svg viewBox="0 0 40 24">${wing('fw', dur, beg - .06).replace('<path ', '<path transform="translate(1.3 -.4)" ')}<path d="M10.5 12.2 Q13 10.6 19 10.8 Q25 11 28.5 11.4 L33 10 L32 12.4 L33.4 14.2 L28.5 13.2 Q24 14.4 18 14.2 Q12.5 13.8 10.5 12.2Z"/><circle cx="11.6" cy="11.8" r="2.1"/><path d="M9.8 11.2 L7.4 12 L9.8 12.6Z"/>${wing('nw', dur, beg)}</svg>`;
       fx.appendChild(b); setTimeout(() => b.remove(), 8500);
     });
   };
