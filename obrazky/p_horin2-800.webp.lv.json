@@ -1,0 +1,18 @@
+{
+ "image": "N:\\claude-local-pc-ales\\repos\\dolium-web\\obrazky\\p_horin2-800.webp",
+ "sha256": "52909f721d289d2fa98882034dfe07bc40bf32d202da2d70fc0ea671db6790e1",
+ "model": "qwen2.5vl:7b",
+ "ts": "2026-10-16T11:02:56+02:00",
+ "prompt": "Popiš fotografii věcně a česky. Uveď: (1) co je na snímku (objekt, materiál, prvek stavby/pomníku), (2) všechny čitelné nápisy, čísla a označení PŘEPIŠ DOSLOVNĚ, (3) stav a viditelná poškození (praskliny, chybějící části, znečištění), (4) měřítko/rozměry jen pokud jsou na snímku (metr, kóta). Bez domněnek: co není vidět, nepiš. Max 12 vět.",
+ "text": "(1) Na snímku je vodní přechod nebo štítová přehrada. Materiál je z kamene a betonu. Prvek stavby je štítová přehrada.\n\n(2) Není na snímku žádný čitelný nápis, číslo nebo označení.\n\n(3) Stav přehrady je dobrý, bez viditelných prasklin nebo chybějících částí. Znečištění je minimální.\n\n(4) Rozměry nejsou na snímku uvedeny.",
+ "tiles": null,
+ "ocr_text": null,
+ "secs": 4.1,
+ "provenance": "AI hypotéza (neověřeno) — lokální vision model; nápisy ověřit proti originálu",
+ "size_sent": [
+  800,
+  600
+ ],
+ "done_reason": "stop",
+ "eval_count": 146
+}

@@ -1,0 +1,18 @@
+{
+ "image": "N:\\claude-local-pc-ales\\repos\\dolium-web\\obrazky\\p_cm2-800.webp",
+ "sha256": "27877e3bb82bebb16863ce142a4f8ee776933de15cee4026792374ea87a5a7a2",
+ "model": "qwen2.5vl:7b",
+ "ts": "2026-10-16T11:02:36+02:00",
+ "prompt": "Popiš fotografii věcně a česky. Uveď: (1) co je na snímku (objekt, materiál, prvek stavby/pomníku), (2) všechny čitelné nápisy, čísla a označení PŘEPIŠ DOSLOVNĚ, (3) stav a viditelná poškození (praskliny, chybějící části, znečištění), (4) měřítko/rozměry jen pokud jsou na snímku (metr, kóta). Bez domněnek: co není vidět, nepiš. Max 12 vět.",
+ "text": "(1) Na snímku je podzemní stanice metra s kubickými sloupy a dlažbou.\n\n(2) Čitelné nápisy: \"A\", \"C\", \"1\", \"2\".\n\n(3) Stanice je v dobrém stavu, bez viditelných prasklin, chybějících částí nebo znečištění.\n\n(4) Rozměry nejsou na snímku uvedeny.",
+ "tiles": null,
+ "ocr_text": null,
+ "secs": 4.2,
+ "provenance": "AI hypotéza (neověřeno) — lokální vision model; nápisy ověřit proti originálu",
+ "size_sent": [
+  800,
+  533
+ ],
+ "done_reason": "stop",
+ "eval_count": 113
+}

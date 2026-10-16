@@ -199,7 +199,7 @@ window.REFS=[
 "n": "Rezidence Kampa",
 "y": "2011",
 "o": "HOCHTIEF CZ a.s.",
-"p": "dlažby, schody, pražská mozaika",
+"p": "dlažby, schody",
 "c": "budovy"
 },
 {
@@ -252,13 +252,6 @@ window.REFS=[
 "c": "budovy"
 },
 {
-"n": "I/38 Kolín obchvat: SO 215 most v km 2,245 trati ČD Kolín – Ledečko přes I/38",
-"y": "2009",
-"o": "Metrostav a.s., D4",
-"p": "dláždění svahů – lomový kámen",
-"c": "doprava"
-},
-{
 "n": "Obložení schodiště – podchod Milíkov",
 "y": "2009",
 "o": "Merit Bau CZ a.s.",
@@ -266,18 +259,11 @@ window.REFS=[
 "c": "doprava"
 },
 {
-"n": "PROSEK POINT – Kamenná dlažba – kombinace velkoformátové žulové dlažby se syenitovou mozaikou",
+"n": "PROSEK POINT – velkoformátová žulová dlažba",
 "y": "2008–09",
 "o": "HOCHTIEF CZ a.s.",
-"p": "formátová dlažba, štípaná mozaika 6/6 – žula",
+"p": "formátová dlažba – žula",
 "c": "budovy"
-},
-{
-"n": "Karlovarská, rozšíření komunikace, v Praze 6",
-"y": "2008–09",
-"o": "HOCHTIEF CZ a.s.",
-"p": "dodávka žulových obrubníků",
-"c": "doprava"
 },
 {
 "n": "II/247 Litoměřice – přivaděč k průmyslové zóně Prosmyky",

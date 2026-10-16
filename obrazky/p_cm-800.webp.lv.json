@@ -1,0 +1,18 @@
+{
+ "image": "N:\\claude-local-pc-ales\\repos\\dolium-web\\obrazky\\p_cm-800.webp",
+ "sha256": "b1426f0bddf4ceac051444eb5ea125cacfc6c264ad76502f367d86f14f1e2c35",
+ "model": "qwen2.5vl:7b",
+ "ts": "2026-10-16T11:02:06+02:00",
+ "prompt": "Popiš fotografii věcně a česky. Uveď: (1) co je na snímku (objekt, materiál, prvek stavby/pomníku), (2) všechny čitelné nápisy, čísla a označení PŘEPIŠ DOSLOVNĚ, (3) stav a viditelná poškození (praskliny, chybějící části, znečištění), (4) měřítko/rozměry jen pokud jsou na snímku (metr, kóta). Bez domněnek: co není vidět, nepiš. Max 12 vět.",
+ "text": "(1) Na snímku je podzemní stanice metra s vysokým stropem a sloupy, které jsou pokryty dlažbou. \n\n(2) Čitelné nápisy jsou: \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec\", \"Konec",
+ "tiles": null,
+ "ocr_text": null,
+ "secs": 30.6,
+ "provenance": "AI hypotéza (neověřeno) — lokální vision model; nápisy ověřit proti originálu",
+ "size_sent": [
+  800,
+  533
+ ],
+ "done_reason": "length",
+ "eval_count": 700
+}

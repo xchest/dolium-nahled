@@ -184,6 +184,12 @@ section{padding:clamp(72px,10vw,140px) 0}
 
 /* ---------- about ---------- */
 .about{background:var(--night);color:#e7ebe8}
+.about{position:relative;overflow:hidden}.about>.wrap{position:relative;z-index:1}
+.about .wm{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:min(94vw,1150px);opacity:.055;pointer-events:none;z-index:0}
+.cv{list-style:none;padding:0;margin:14px 0 16px;border-top:1px solid #2a3631}
+.cv li{position:relative;padding:9px 0 9px 22px;border-bottom:1px solid #2a3631;color:#aab5b0;font-size:15px;line-height:1.5}
+.cv li::before{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:var(--sand)}
+.cv strong{color:#e7ebe8;font-weight:500}
 .about .eyebrow{color:var(--sand)}
 .cols{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
 .about p{color:#aab5b0}
@@ -342,6 +348,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </section>
 
 <section id="o-nas" class="about">
+  <svg class="wm" viewBox="0 0 400 100" aria-hidden="true"><path fill="#8f6c37" fill-rule="evenodd" transform="translate(0 2) scale(2)" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/><text x="250" y="74" text-anchor="middle" textLength="290" lengthAdjust="spacing" font-family="Inter Tight,sans-serif" font-size="70" font-weight="700" fill="#cfa652">DOLIUM</text></svg>
   <div class="wrap cols">
     <div>
       <div class="eyebrow rv">O nás</div>
@@ -353,9 +360,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <li data-n="03">Kamenné fasády</li>
         <li data-n="04">Opěrné a nábřežní zdi</li>
         <li data-n="05">Obklady mostních pilířů</li>
-        <li data-n="06">Komunikace a chodníky z kamene</li>
-        <li data-n="07">Architektonické kamenné prvky</li>
-        <li data-n="08">Repase a restaurování</li>
+        <li data-n="06">Architektonické kamenné prvky</li>
+        <li data-n="07">Repase a restaurování</li>
       </ul>
     </div>
     <div>
@@ -363,7 +369,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="person rv">
         <em>jednatel</em>
         <b>Ing. Josef Tomka</b>
-        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a dopravní stavby, zaměření geotechnika. Devatenáct let ve společnosti Metrostav, od roku 1994 se věnuje kamenickým stavbám. Je členem Svazu kameníků a kamenosochařů ČR. Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl. m. Prahy, stanic metra Náměstí Míru, Kolbenova a Černý Most a Lahovického mostu.</p>
+        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a dopravní stavby, zaměření geotechnika.</p>
+        <ul class="cv">
+          <li><strong>19 let ve společnosti Metrostav</strong> — projekce, předvýrobní příprava, oddělení tunelářské technologie</li>
+          <li><strong>Zahraniční stáž v Turecku</strong> — ražba tunelu Selatin Novou rakouskou tunelovací metodou (NRTM)</li>
+          <li><strong>Zakládající vedoucí</strong> pobočky Metrostav Plzeň</li>
+          <li><strong>Od roku 1994</strong> se věnuje kamenickým stavbám; člen Svazu kameníků a kamenosochařů ČR</li>
+        </ul>
+        <p>Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl. m. Prahy, stanic metra Náměstí Míru, Kolbenova a Černý Most a Lahovického mostu.</p>
       </div>
       <div class="person rv">
         <em>stavbyvedoucí</em>
@@ -428,15 +441,14 @@ const PAN = {
   '2015': {k:'strip', f:['r16','r17','r18']},
   '2013': {k:'strip', f:['r11','r12','r10']},
   '2010': {k:'pan', f:'w_fas1', s:'Řemeslo', t:'Každý kámen projde rukama'},
-  '2008': {k:'strip', f:['r07','r08','r14']},
+  '2008': {k:'strip', f:['r00','r13','r04']},
 };
 const G = [
   ['w_komora','Historická plavební komora — kvádrové zdivo'],['w_fas2','Montáž travertinové fasády'],['w_fas1','Travertinový obklad — osazování'],
   ['w_zed1','Historická zeď před opravou'],['w_zed2','Historická zeď po opravě — nové pískovcové krycí desky'],
   ['r00','Schodiště a obklady — travertin'],['r01','Schodiště a obklady — travertin'],['r02','Schodiště — travertin'],
-  ['r03','Schodiště se zábradlím — travertin'],['r07','Náměstí — drobná žulová kostka a kamenné pásy'],['r08','Náměstí — drobná žulová kostka a kamenné pásy'],
-  ['r05','Kamenný sokl a mozaiková dlažba'],['r06','Kamenný sokl a mozaiková dlažba'],['r09','Chodník — mozaiková dlažba'],
-  ['r14','Dlažba z žulových desek a mozaiky'],['r15','Komunikace z kamenných kostek'],['r04','Fasáda — travertin'],
+  ['r03','Schodiště se zábradlím — travertin'],
+  ['r04','Fasáda — travertin'],
   ['r11','Obklad mostního pilíře — žula'],['r12','Obklad mostního pilíře — žula'],['r10','Schodiště — kamenné stupně'],
   ['r13','Venkovní schodiště — žula'],['r16','Obklady pilířů a sokly v nádražní hale'],['r17','Obklady pilířů a sokly v nádražní hale'],
   ['r18','Schodiště v podchodu — žula'],['r19','Schodiště v podchodu — žula']

@@ -149,6 +149,11 @@ body.lock{overflow:hidden}
 .odo .d span{display:block;transition:transform .32s cubic-bezier(.3,.7,.2,1)}
 .odo.fast .d span{transition-duration:var(--td,.06s);transition-timing-function:linear}
 #roky.spin .card{transition:opacity var(--td,.06s),transform var(--td,.06s)}#roky.spin .card img{transition:none}
+.card figure.pp{display:grid;grid-template-columns:1fr 1fr;gap:3px;aspect-ratio:16/11}
+.card .pp .h{position:relative;overflow:hidden;min-width:0}
+.card .pp .af{opacity:0;transform:translateX(16px);transition:opacity .8s,transform .8s var(--ease)}
+.card .pp .af.in{opacity:1;transform:none}@media (max-width:860px){.card figure.pp{aspect-ratio:16/9}}
+.card .pp b{position:absolute;left:8px;bottom:8px;font-size:10px;font-weight:500;line-height:1;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(18,27,23,.72);padding:5px 7px;border-radius:3px}
 .odo .d i{display:block;font-style:normal;height:1em}
 .counter small{margin-top:16px;font-size:15px;letter-spacing:.16em;color:#c9b48a;text-transform:uppercase;text-align:center}
 .counter small b{color:#fff;font-weight:600}
@@ -203,6 +208,12 @@ body.lock{overflow:hidden}
 .head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:40px;flex-wrap:wrap}
 .head p{max-width:440px;color:var(--muted);margin:0}
 .about{background:var(--night);color:#e7ebe8}
+.about{position:relative;overflow:hidden}.about>.wrap{position:relative;z-index:1}
+.about .wm{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:min(94vw,1150px);opacity:.055;pointer-events:none;z-index:0}
+.cv{list-style:none;padding:0;margin:14px 0 16px;border-top:1px solid #2a3631}
+.cv li{position:relative;padding:9px 0 9px 22px;border-bottom:1px solid #2a3631;color:#aab5b0;font-size:15px;line-height:1.5}
+.cv li::before{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:var(--sand)}
+.cv strong{color:#e7ebe8;font-weight:500}
 .about .eyebrow{color:var(--sand)}
 .cols{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
 .about p{color:#aab5b0}
@@ -323,18 +334,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="reference">
-  <div class="wrap">
-    <div class="head">
-      <div class="rv"><div class="eyebrow">Všechny reference</div><h2>Stavby <span class="serif">2026 → 2007</span></h2></div>
-      <p class="rv">Stavby, na kterých jsme prováděli kamenické práce — od nejnovějších po první zakázky firmy.</p>
-    </div>
-    <div class="list rv" id="list"></div>
-    <button class="more" id="more" type="button">Zobrazit všechny</button>
-  </div>
-</section>
-
 <section id="o-nas" class="about">
+  <svg class="wm" viewBox="0 0 400 100" aria-hidden="true"><path fill="#8f6c37" fill-rule="evenodd" transform="translate(0 2) scale(2)" d="M7 5h16c12 0 19 7.6 19 19s-7 19-19 19H7zM18 13h4.5c7 0 10.5 4 10.5 11s-3.5 11-10.5 11H18z"/><text x="250" y="74" text-anchor="middle" textLength="290" lengthAdjust="spacing" font-family="Inter Tight,sans-serif" font-size="70" font-weight="700" fill="#cfa652">DOLIUM</text></svg>
   <div class="wrap cols">
     <div>
       <div class="eyebrow rv">O nás</div>
@@ -346,16 +347,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <li data-n="03">Kamenné fasády</li>
         <li data-n="04">Opěrné a nábřežní zdi</li>
         <li data-n="05">Obklady mostních pilířů</li>
-        <li data-n="06">Komunikace a chodníky z kamene</li>
-        <li data-n="07">Architektonické kamenné prvky</li>
-        <li data-n="08">Repase a restaurování</li>
+        <li data-n="06">Architektonické kamenné prvky</li>
+        <li data-n="07">Repase a restaurování</li>
       </ul>
     </div>
     <div>
       <div class="person rv">
         <em>jednatel</em>
         <b>Ing. Josef Tomka</b>
-        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a dopravní stavby, zaměření geotechnika. Devatenáct let ve společnosti Metrostav, od roku 1994 se věnuje kamenickým stavbám. Je členem Svazu kameníků a kamenosochařů ČR. Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl. m. Prahy, stanic metra Náměstí Míru, Kolbenova a Černý Most a Lahovického mostu.</p>
+        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a dopravní stavby, zaměření geotechnika.</p>
+        <ul class="cv">
+          <li><strong>19 let ve společnosti Metrostav</strong> — projekce, předvýrobní příprava, oddělení tunelářské technologie</li>
+          <li><strong>Zahraniční stáž v Turecku</strong> — ražba tunelu Selatin Novou rakouskou tunelovací metodou (NRTM)</li>
+          <li><strong>Zakládající vedoucí</strong> pobočky Metrostav Plzeň</li>
+          <li><strong>Od roku 1994</strong> se věnuje kamenickým stavbám; člen Svazu kameníků a kamenosochařů ČR</li>
+        </ul>
+        <p>Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl. m. Prahy, stanic metra Náměstí Míru, Kolbenova a Černý Most a Lahovického mostu.</p>
       </div>
       <div class="person rv">
         <em>stavbyvedoucí</em>
@@ -386,6 +393,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <script src="refs.js"></script>
 <script src="roky.js"></script>
+<script src="pred.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const img = (f, w) => `obrazky/${f}-${w}.webp`;
@@ -437,6 +445,7 @@ const onHdr = () => hdr.classList.toggle('solid', scrollY > innerHeight * .6);
 const REF = window.REFS, RY = Object.fromEntries(window.ROKY.map(r => [r.y, r]));
 const PH = {2026:'Rezidence Turbová', 2023:'Rekonstrukce Palác Dunaj Národní třída Praha 1', 2020:'Rekonstrukce PK Hořín'}; // rok bez vlastní fotky → hlavní stavba roku
 const OWN = {'Rezidence Turbová':'w_turbova', 'Rekonstrukce PK Hořín':'w_komora'}; // naše fotka stavby má přednost
+const BEFORE = window.PRED || {}; // stavba → {f: fotka před, lic}
 const KN = Object.fromEntries(window.ROKY.map(r => [r.n, r])); // fotka patří stavbě, ne roku → stejná stavba = stejná fotka
 const span = y => { const m = String(y).match(/(\d{4})\D*(\d{1,4})?/), a = +m[1]; return [a, m[2] ? +(String(a).slice(0, 4 - m[2].length) + m[2]) : a]; };
 REF.forEach(r => [r.a, r.b] = span(r.y));
@@ -451,7 +460,7 @@ for (let Y = Math.max(...REF.map(r => r.b)); Y >= Math.min(...REF.map(r => r.a))
   const k = RY[Y], top = it.find(r => r.n === (k ? k.n : PH[Y]));
   const f = top || it[0];
   const kn = KN[f.n], own = OWN[f.n];
-  R.push({y: String(Y), f: own || (kn ? kn.f : 'r04'), ok: !own && kn && kn.ok, lic: kn && kn.lic, cap: '', n: f.n, o: f.o, p: k ? k.p : f.p, l: f.y, it: it.filter(r => r !== f), cnt: it.length, nov: it.filter(r => r.a === Y).length});
+  R.push({y: String(Y), bf: BEFORE[f.n], f: own || (kn ? kn.f : 'r04'), ok: !own && kn && kn.ok, lic: kn && kn.lic, cap: '', n: f.n, o: f.o, p: k ? k.p : f.p, l: f.y, it: it.filter(r => r !== f), cnt: it.length, nov: it.filter(r => r.a === Y).length});
 }
 const N = R.length, pl = n => n === 1 ? 'stavba' : n < 5 ? 'stavby' : 'staveb';
 $('#rintro').textContent = `Reference · ${R[0].y} → ${R[N - 1].y} · ${REF.length} staveb`;
@@ -465,11 +474,13 @@ const mob = matchMedia('(max-width:860px)'), drum = $('#drum');
 drum.firstChild.innerHTML = R.map(r => `<li>${r.y}</li>`).join('');
 const dli = [...drum.querySelectorAll('li')]; let drumSync = false;
 function drumTo(i) { if (!mob.matches) return; drumSync = true; drum.scrollTo({top: i * dli[0].offsetHeight, behavior: RM || spinOn ? 'auto' : 'smooth'}); clearTimeout(drumTo.t); drumTo.t = setTimeout(() => drumSync = false, 650); }
-R.forEach(r => { const i = new Image(); i.src = img(r.f, 800); });
+R.forEach(r => [r.f, r.bf && r.bf.f].filter(Boolean).forEach(f => { const i = new Image(); i.src = img(f, 800); }));
 
 function cardHTML(r) {
-  const cr = r.ok ? `<span class="cr">Foto: ${esc(r.lic)}</span>` : r.cap ? `<span class="cr">Ilustrační foto · ${esc(r.cap)}</span>` : '';
-  return `<div class="lk"></div><figure><img src="${img(r.f, 800)}" srcset="${img(r.f, 800)} 800w, ${img(r.f, 1600)} 1600w" sizes="(max-width:860px) 100vw, 420px" alt="${esc(r.n)}"></figure>
+  const cr = r.bf && r.bf.lic ? `<span class="cr">Foto před: ${esc(r.bf.lic)}${r.ok ? ` · po: ${esc(r.lic)}` : ''}</span>` : r.ok ? `<span class="cr">Foto: ${esc(r.lic)}</span>` : r.cap ? `<span class="cr">Ilustrační foto · ${esc(r.cap)}</span>` : '';
+  const pic = (f, a, s) => `<img src="${img(f, 800)}" srcset="${img(f, 800)} 800w, ${img(f, 1600)} 1600w" sizes="${s}" alt="${esc(a)}">`;
+  const fig = r.bf ? `<figure class="pp"><div class="h bf">${pic(r.bf.f, r.n + ' – před', '(max-width:860px) 50vw, 210px')}<b>Před</b></div><div class="h af">${pic(r.f, r.n + ' – po', '(max-width:860px) 50vw, 210px')}<b>Po</b></div></figure>` : `<figure>${pic(r.f, r.n, '(max-width:860px) 100vw, 420px')}</figure>`;
+  return `<div class="lk"></div>${fig}
     <div class="meta"><em>${esc(r.l)} · ${esc(r.o)}</em><h3>${esc(r.n)}</h3><p>${esc(r.p)}</p>${cr}${r.it.length ? `<ul>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><span>${esc(x.n)}</span><i>${x.a === x.b ? esc(x.p) : esc(x.y)}</i></li>`).join('')}</ul>` : ''}</div>`;
 }
 function show(i, fromDrum) {
@@ -478,11 +489,12 @@ function show(i, fromDrum) {
   [...r.y].forEach((d, k) => digs[k].style.transform = `translateY(-${d}em)`);
   $('#rcount').innerHTML = `<b>${r.cnt}</b> ${pl(r.cnt)} v běhu${r.nov && r.nov < r.cnt ? ` · ${r.nov} ${r.nov === 1 ? 'nová' : r.nov < 5 ? 'nové' : 'nových'}` : ''}`;
   ticks.forEach((t, k) => t.classList.toggle('on', k === i));
-  $('#rbg').style.backgroundImage = `url(${img(r.f, 800)})`;
+  $('#rbg').style.backgroundImage = `url(${img(r.bf ? r.bf.f : r.f, 800)})`; clearTimeout(show.t);
   const old = cards[flip]; flip ^= 1; const c = cards[flip];
   old.classList.remove('on');
   c.className = 'card ' + (i % 2 ? 'R' : 'L'); c.innerHTML = cardHTML(r);
   requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('on')));
+  if (r.bf) show.t = setTimeout(() => { const a = c.querySelector('.af'); if (a) a.classList.add('in'); $('#rbg').style.backgroundImage = `url(${img(r.f, 800)})`; }, 1000); // 1. s před, 2.–3. s po
   const yl = $('#ylist'); yl.className = 'ylist ' + (i % 2 ? 'L' : 'R');
   yl.innerHTML = r.it.length ? `<h4>Další stavby ${r.y}</h4><ol>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><b>${esc(x.n)}</b><span>${esc(x.y)} · ${esc(x.o)} · ${esc(x.p)}</span></li>`).join('')}</ol>` : '';
   if (r.it.length) requestAnimationFrame(() => requestAnimationFrame(() => yl.classList.add('on')));
@@ -521,7 +533,7 @@ ctr.addEventListener('keydown', e => {
   if (d) { e.preventDefault(); step(d); }
 });
 ticks.forEach((t, k) => t.onclick = () => show(k));
-/* příjezd do sekce: roky se samy protočí 2026 → nejstarší → zpět 2026 i s referencemi a fotkami */
+/* příjezd do sekce: roky jdou samy 2026 → nejstarší, každý rok 3 s (1. s fotka před, 2.–3. s po), bez zrychlování */
 let spinOn = false;
 const rk = $('#roky');
 function stopSpin(e) {
@@ -531,18 +543,15 @@ function stopSpin(e) {
 }
 function spin() {
   if (RM || spinOn) return; if (cur !== 0) show(0);
-  spinOn = true; spin.at = performance.now(); odo.classList.add('fast'); rk.classList.add('spin');
-  const seq = [...R.keys(), ...[...R.keys()].reverse().slice(1)]; let k = 0;
+  spinOn = true; spin.at = performance.now(); rk.classList.add('spin'); odo.style.setProperty('--td', '.6s'); rk.style.setProperty('--td', '.6s');
+  const seq = [...R.keys()].slice(1), D = 3000; let k = 0;
   const tick = () => {
     if (!spinOn) return; const i = seq[k++];
-    // dolů: pomalu, rychleji, rychleji, rychle — na nejstarším roce náraz a krátké stání — zpět rychle
-    const d = k < N ? 70 + 680 * (1 - k / N) ** 2.4 : k === N ? 900 : 70;
-    const td = Math.min(d * .7, 380) / 1000 + 's'; odo.style.setProperty('--td', td); rk.style.setProperty('--td', td);
     show(i);
     if (k >= seq.length) { stopSpin(); return; }
-    spin.t = setTimeout(tick, d);
+    spin.t = setTimeout(tick, D);
   };
-  spin.t = setTimeout(tick, 600);
+  spin.t = setTimeout(tick, D);
 }
 ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => $('#roky').addEventListener(ev, stopSpin, {capture:true, passive:true}));
 let rokyIn = false;
@@ -553,17 +562,8 @@ new IntersectionObserver(es => es.forEach(e => {
 if (matchMedia('(hover:none)').matches) $('#rhint').textContent = mob.matches ? 'točte palcem · fotku táhněte do strany' : 'táhněte prstem po letopočtu';
 show(0);
 
-/* seznam referencí */
-const L = window.REFS; let all = false;
-function list() {
-  const rows = (all ? L : L.slice(0, 12)).map(r => `<div class="row"><span class="y">${esc(r.y)}</span><span class="n">${esc(r.n)}</span><span class="o">${esc(r.o)}</span><span class="p">${esc(r.p)}</span></div>`);
-  $('#list').innerHTML = rows.join(''); $('#more').style.display = all ? 'none' : '';
-}
-$('#more').onclick = () => { all = true; list(); };
-list();
-
 /* jednotný posun: jedno gesto kolečkem / prstem = další stránka (sekce); delší sekci projde po obrazovkách */
-const PAGES = ['#hero', '#roky', '#reference', '#o-nas', '#kontakt'].map(q => $(q)).filter(Boolean);
+const PAGES = ['#hero', '#roky', '#o-nas', '#kontakt'].map(q => $(q)).filter(Boolean);
 let pgBusy = false, pgLast = 0, ctrMoved = false, tY0 = null, tX0 = 0, tFromCtr = false;
 function pageGo(dir) {
   if (pgBusy || document.body.classList.contains('lock')) return;

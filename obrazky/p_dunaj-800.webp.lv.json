@@ -1,0 +1,18 @@
+{
+ "image": "N:\\claude-local-pc-ales\\repos\\dolium-web\\obrazky\\p_dunaj-800.webp",
+ "sha256": "d914b907ac5a902d8fed3f0744aa3518ff0ef62f64a07441491acc6d23e83025",
+ "model": "qwen2.5vl:7b",
+ "ts": "2026-10-16T11:02:40+02:00",
+ "prompt": "Popiš fotografii věcně a česky. Uveď: (1) co je na snímku (objekt, materiál, prvek stavby/pomníku), (2) všechny čitelné nápisy, čísla a označení PŘEPIŠ DOSLOVNĚ, (3) stav a viditelná poškození (praskliny, chybějící části, znečištění), (4) měřítko/rozměry jen pokud jsou na snímku (metr, kóta). Bez domněnek: co není vidět, nepiš. Max 12 vět.",
+ "text": "(1) Na snímku je nárožní budova s vícepatrovým obytným a obchodním prostorem. Materiál budovy je zpravdě kamenný s bílými a hnědými fasádami. Prvek stavby je nárožní balkon s ozdobným zábradlím.\n\n(2) Čitelné nápisy na snímku jsou: \"FISCHER\", \"SUNDEVA\", \"KNIHKUPESTI\", \"P\", \"A\", \"PŘEPIŠ DOSLOVNĚ\".\n\n(3) Stav budovy je dobrý, bez viditelných prasklin, chybějících částí nebo znečištění.\n\n(4) Rozměry budovy nejsou na snímku uvedeny.",
+ "tiles": null,
+ "ocr_text": null,
+ "secs": 5.7,
+ "provenance": "AI hypotéza (neověřeno) — lokální vision model; nápisy ověřit proti originálu",
+ "size_sent": [
+  800,
+  552
+ ],
+ "done_reason": "stop",
+ "eval_count": 208
+}
