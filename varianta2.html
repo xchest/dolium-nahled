@@ -195,6 +195,29 @@ body.lock{overflow:hidden}
 .ylist li span{display:block;font-size:12px;color:#8a9a93;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ylist li.run b::after{content:" · pokračuje";font-weight:400;font-size:11px;color:var(--sand)}
 @media (min-width:861px){.card ul{display:none}}
+/* v80: galerie před – rok – po: fotka před vlevo od letopočtu, fotka po (+ popis) vpravo */
+.card.pair{top:0;bottom:0;left:0;right:0;width:auto;transform:none;pointer-events:none}
+.card.pair.on{transform:none}
+.pair .sd{position:absolute;top:50%;width:min(400px,27vw);transition:transform .38s var(--ease);pointer-events:auto}
+.pair .sd.L{right:calc(50% + min(280px,21vw));transform:translate(-40px,-50%)}
+.pair .sd.R{left:calc(50% + min(280px,21vw));transform:translate(40px,-50%)}
+.pair.on .sd{transform:translate(0,-50%)}
+.pair .sd.L .lk{left:100%}.pair .sd.R .lk{right:100%}
+.pair .sd.L .lk::after{right:-4px}.pair .sd.R .lk::after{left:-4px}
+.pair figure{position:relative}
+.pair figure b{position:absolute;left:8px;bottom:8px;font-size:10px;font-weight:500;line-height:1;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(18,27,23,.72);padding:5px 7px;border-radius:3px}
+.pair figure.af{opacity:0;transition:opacity .8s}.pair figure.af.in{opacity:1}
+.pair .ylist{position:static;width:auto;max-height:min(30vh,250px);margin-top:16px;opacity:1;transform:none;pointer-events:auto}
+.pair .sd.L figure+.ylist{margin-top:16px}.pair .sd.L>.ylist:nth-child(2){margin-top:0}
+@media (max-width:860px){
+  .card.pair{left:20px;right:20px;top:calc(104px + 31svh);bottom:auto;display:grid;grid-template-columns:1fr 1fr;gap:3px;transform:translateY(30px);pointer-events:auto}
+  .card.pair.on{transform:none}
+  .pair .sd{display:contents}
+  .pair .ylist{display:none}
+  .pair .meta{grid-column:1/-1}
+  .pair figure{aspect-ratio:16/9}
+  .pair.one figure{grid-column:1/-1;aspect-ratio:16/7}
+}
 .drum{display:none}
 
 /* ---------- seznam, o nás, kontakt ---------- */
@@ -536,10 +559,13 @@ R.forEach(r => [r.f, r.bf && r.bf.f].filter(Boolean).forEach(f => { const i = ne
 
 function cardHTML(r) {
   const cr = r.bf && r.bf.lic ? `<span class="cr">Foto před: ${esc(r.bf.lic)}${r.ok ? ` · po: ${esc(r.lic)}` : ''}</span>` : r.ok ? `<span class="cr">Foto: ${esc(r.lic)}</span>` : r.cap ? `<span class="cr">Ilustrační foto · ${esc(r.cap)}</span>` : '';
-  const pic = (f, a, s) => `<img src="${img(f, 800)}" srcset="${img(f, 800)} 800w, ${img(f, 1600)} 1600w" sizes="${s}" alt="${esc(a)}">`;
-  const fig = r.bf ? `<figure class="pp"><div class="h bf">${pic(r.bf.f, r.n + ' – před', '(max-width:860px) 50vw, 210px')}<b>Před</b></div><div class="h af">${pic(r.f, r.n + ' – po', '(max-width:860px) 50vw, 210px')}<b>Po</b></div></figure>` : `<figure>${pic(r.f, r.n, '(max-width:860px) 100vw, 420px')}</figure>`;
-  return `<div class="lk"></div>${fig}
-    <div class="meta"><em>${esc(r.l)} · ${esc(r.o)}</em><h3>${esc(r.n)}</h3><p>${esc(r.p)}</p>${cr}${r.it.length ? `<ul>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><span>${esc(x.n)}</span><i>${x.a === x.b ? esc(x.p) : esc(x.y)}</i></li>`).join('')}</ul>` : ''}</div>`;
+  const pic = (f, a) => `<img src="${img(f, 800)}" srcset="${img(f, 800)} 800w, ${img(f, 1600)} 1600w" sizes="(max-width:860px) 50vw, 420px" alt="${esc(a)}">`;
+  const pred = r.bf ? `<figure>${pic(r.bf.f, r.n + ' – před')}<b>Před</b></figure>` : '';
+  const yl = r.it.length ? `<div class="ylist"><h4>Další stavby ${r.y}</h4><ol>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><b>${esc(x.n)}</b><span>${esc(x.y)} · ${esc(x.o)} · ${esc(x.p)}</span></li>`).join('')}</ol></div>` : '';
+  const po = `<figure${r.bf ? ' class="af"' : ''}>${pic(r.f, r.bf ? r.n + ' – po' : r.n)}${r.bf ? '<b>Po</b>' : ''}</figure>`;
+  return `<div class="sd L">${pred || yl ? '<div class="lk"></div>' : ''}${pred}${yl}</div>
+    <div class="sd R"><div class="lk"></div>${po}
+    <div class="meta"><em>${esc(r.l)} · ${esc(r.o)}</em><h3>${esc(r.n)}</h3><p>${esc(r.p)}</p>${cr}${r.it.length ? `<ul>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><span>${esc(x.n)}</span><i>${x.a === x.b ? esc(x.p) : esc(x.y)}</i></li>`).join('')}</ul>` : ''}</div></div>`;
 }
 function show(i, fromDrum) {
   if (i === cur) return; cur = i; const r = R[i];
@@ -550,12 +576,10 @@ function show(i, fromDrum) {
   $('#rbg').style.backgroundImage = `url(${img(r.bf ? r.bf.f : r.f, 800)})`; clearTimeout(show.t);
   const old = cards[flip]; flip ^= 1; const c = cards[flip];
   old.classList.remove('on');
-  c.className = 'card ' + (i % 2 ? 'R' : 'L'); c.innerHTML = cardHTML(r);
+  c.className = 'card pair' + (r.bf ? '' : ' one'); c.innerHTML = cardHTML(r);
   requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('on')));
   if (r.bf) show.t = setTimeout(() => { const a = c.querySelector('.af'); if (a) a.classList.add('in'); $('#rbg').style.backgroundImage = `url(${img(r.f, 800)})`; }, 1000); // 1. s před, 2.–3. s po
-  const yl = $('#ylist'); yl.className = 'ylist ' + (i % 2 ? 'L' : 'R');
-  yl.innerHTML = r.it.length ? `<h4>Další stavby ${r.y}</h4><ol>${r.it.map(x => `<li class="${x.a < +r.y ? 'run' : ''}"><b>${esc(x.n)}</b><span>${esc(x.y)} · ${esc(x.o)} · ${esc(x.p)}</span></li>`).join('')}</ol>` : '';
-  if (r.it.length) requestAnimationFrame(() => requestAnimationFrame(() => yl.classList.add('on')));
+  $('#ylist').className = 'ylist'; // seznam staveb je nově v levém panelu pod fotkou před
 }
 /* roky se přepínají jen nad letopočtem: kolečko, tah prstem, šipky, klik na rail */
 const ctr = $('#counter'); let acc = 0, ty = null, ctrLock = 0, ctrDone = false;
