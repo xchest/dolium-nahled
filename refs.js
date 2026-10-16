@@ -49,7 +49,7 @@ window.REFS=[
 "c": "budovy"
 },
 {
-"n": "Opatovice n. L.,  obklad mostu",
+"n": "Opatovice n. L., obklad mostu",
 "y": "2021",
 "o": "SMP CZ a.s.",
 "p": "řádkový obklad – haklíky",
@@ -119,7 +119,7 @@ window.REFS=[
 "c": "doprava"
 },
 {
-"n": "Trať Rokycany - Plzeň",
+"n": "Trať Rokycany – Plzeň",
 "y": "2016",
 "o": "Metrostav a.s., D5",
 "p": "obklady pilířů a zdí",
@@ -147,7 +147,7 @@ window.REFS=[
 "c": "doprava"
 },
 {
-"n": "METRO V A, Motol, Bořislavka",
+"n": "Metro V.A Motol, Bořislavka",
 "y": "2014",
 "o": "HOCHTIEF CZ a.s.",
 "p": "dlažby, obklady, schodiště",
@@ -177,7 +177,7 @@ window.REFS=[
 {
 "n": "AOBD Pankrác",
 "y": "2012",
-"o": "MTS D3",
+"o": "Metrostav a.s., D3",
 "p": "vnitřní dlažba, schody",
 "c": "budovy"
 },
@@ -210,7 +210,7 @@ window.REFS=[
 "c": "budovy"
 },
 {
-"n": "Optimalizace trati Planá u Mariánských Lázní - Cheb",
+"n": "Optimalizace trati Planá u Mariánských Lázní – Cheb",
 "y": "2010",
 "o": "Merit Bau CZ a.s.",
 "p": "žulové obklady",
@@ -220,61 +220,61 @@ window.REFS=[
 "n": "RD Dolní Maxov",
 "y": "2010",
 "o": "RVES CZ a.s.",
-"p": "žulový obklad fasády - haklíky",
+"p": "žulový obklad fasády – haklíky",
 "c": "budovy"
 },
 {
-"n": "Vodní dílo \"Dráteník\"",
+"n": "Vodní dílo „Dráteník“",
 "y": "2010",
-"o": "Metrostav",
+"o": "Metrostav a.s.",
 "p": "dlažby, přelivné hrany, schodiště",
 "c": "voda"
 },
 {
 "n": "Rekonstrukce železniční stanice Praha Hlavní nádraží",
 "y": "2009–11",
-"o": "Metrostav 9",
-"p": "schodiště, obklady - žula, různé repase",
+"o": "Metrostav a.s., D9",
+"p": "schodiště, obklady – žula, různé repase",
 "c": "doprava"
 },
 {
 "n": "Rekonstrukce výpravní budovy ŽST Mariánské Lázně",
 "y": "2009",
-"o": "Metrostav 9",
-"p": "obklady, sokly, prahy - žula, různé repase",
+"o": "Metrostav a.s., D9",
+"p": "obklady, sokly, prahy – žula, různé repase",
 "c": "doprava"
 },
 {
-"n": "Rekonstrukce objektu NKP Památníku na Vítkově Praha 3 - Žižkov",
+"n": "Rekonstrukce objektu NKP Památníku na Vítkově Praha 3 – Žižkov",
 "y": "2009",
 "o": "GEMA ART GROUP a.s.",
-"p": "montáž žulových masívních desek",
+"p": "montáž žulových masivních desek",
 "c": "budovy"
 },
 {
 "n": "I/38 Kolín obchvat: SO 215 most v km 2,245 trati ČD Kolín – Ledečko přes I/38",
 "y": "2009",
-"o": "Metrostav 4",
-"p": "dláždění svahů - lomový kámen",
+"o": "Metrostav a.s., D4",
+"p": "dláždění svahů – lomový kámen",
 "c": "doprava"
 },
 {
-"n": "Obložení schodiště - podchod Milíkov",
+"n": "Obložení schodiště – podchod Milíkov",
 "y": "2009",
 "o": "Merit Bau CZ a.s.",
 "p": "schodiště",
 "c": "doprava"
 },
 {
-"n": "PROSEK POINT - Kamenná dlažba - kombinace velkoformátové žulové dlažby se syenitovou mozaikou",
-"y": "2008-9",
+"n": "PROSEK POINT – Kamenná dlažba – kombinace velkoformátové žulové dlažby se syenitovou mozaikou",
+"y": "2008–09",
 "o": "HOCHTIEF CZ a.s.",
-"p": "formátová dlažba, štípaná mozaika 6/6 - žula",
+"p": "formátová dlažba, štípaná mozaika 6/6 – žula",
 "c": "budovy"
 },
 {
 "n": "Karlovarská, rozšíření komunikace, v Praze 6",
-"y": "2008-9",
+"y": "2008–09",
 "o": "HOCHTIEF CZ a.s.",
 "p": "dodávka žulových obrubníků",
 "c": "doprava"
@@ -282,85 +282,85 @@ window.REFS=[
 {
 "n": "II/247 Litoměřice – přivaděč k průmyslové zóně Prosmyky",
 "y": "2008",
-"o": "SMP CZ, MTS D4",
-"p": "čisté haklíkové zdivo - žula sekané \"in situ\"",
+"o": "SMP CZ a.s., Metrostav a.s., D4",
+"p": "čisté haklíkové zdivo – žula sekané „in situ“",
 "c": "doprava"
 },
 {
-"n": "Stavební úpravy- Ostrovní 8, Praha 1",
+"n": "Stavební úpravy – Ostrovní 8, Praha 1",
 "y": "2008",
 "o": "ARNOŠT s.r.o.",
-"p": "sokly, ostění, obklady - mramory, žula",
+"p": "sokly, ostění, obklady – mramory, žula",
 "c": "budovy"
 },
 {
-"n": "Kamenný sokl pod umělecké dílo - Šemík",
+"n": "Kamenný sokl pod umělecké dílo – Šemík",
 "y": "2008",
 "o": "UNISTAV a.s.",
-"p": "podstavec - Božanovský pískovec",
+"p": "podstavec – Božanovský pískovec",
 "c": "budovy"
 },
 {
 "n": "Optimalizace trati Stříbro – Planá u Mariánských Lázní",
 "y": "2008",
 "o": "SSŽ a.s.",
-"p": "schodiště - žula",
+"p": "schodiště – žula",
 "c": "doprava"
 },
 {
 "n": "Rekonstrukce budovy Dlážděná 5 a 7/1003 v Praze 1",
-"y": "2007-8",
-"o": "Metrostav 3",
-"p": "dlažby - žula, repase schodiště",
+"y": "2007–08",
+"o": "Metrostav a.s., D3",
+"p": "dlažby – žula, repase schodiště",
 "c": "budovy"
 },
 {
 "n": "Výstavba spojovacího tunelu pod ulicí Buzulucká, Rekonstrukce objektů integrovaného MO",
-"y": "2007-8",
+"y": "2007–08",
 "o": "Subterra a.s.",
 "p": "Jurský mramor – dlažby, obklady, schodiště",
 "c": "metro"
 },
 {
 "n": "Rekonstrukce objektu č.p. 3105 k.ú. Kročehlavy-Kladno, 2. část",
-"y": "2007-8",
+"y": "2007–08",
 "o": "Energie–stavební a báňská a.s.",
-"p": "fasáda - Spišský travertin, dlažby, schodiště - žula",
+"p": "fasáda – Spišský travertin, dlažby, schodiště – žula",
 "c": "budovy"
 },
 {
 "n": "Průjezd železničním uzlem Ústí nad Labem, traťový úsek 0801 Praha Masarykovo nádraží – Děčín hlavní nádraží",
 "y": "2007",
-"o": "Metrostav 5",
-"p": "schodiště venkovní - žula",
+"o": "Metrostav a.s., D5",
+"p": "schodiště venkovní – žula",
 "c": "doprava"
 },
 {
-"n": "Dálnice D5 –510/IB Černice – Útušice",
+"n": "Dálnice D5 – 510/IB Černice – Útušice",
 "y": "2007",
-"o": "Metrostav 5",
-"p": "kamenné obklady žula - dlažby, schody, podesty",
+"o": "Metrostav a.s., D5",
+"p": "kamenné obklady žula – dlažby, schody, podesty",
 "c": "doprava"
 },
 {
 "n": "Gallery Myšák, Vodičkova 710/31, Praha 1",
 "y": "2007",
-"o": "Metrostav 1",
+"o": "Metrostav a.s., D1",
 "p": "fasáda – travertin",
 "c": "budovy"
 },
 {
 "n": "Kolektor centrum IA etapa 0004 Vodičkova",
 "y": "2007",
-"o": "Metrostav 1",
-"p": "obklady - Liberecká žula, schodiště Tisská žula",
+"o": "Metrostav a.s., D1",
+"p": "obklady – Liberecká žula, schodiště Tisská žula",
 "c": "metro"
 },
 {
 "n": "Rekonstrukce a oprava hotelu Imperial",
 "y": "2007",
-"o": "Metrostav 9",
-"p": "obklady - mramor",
+"o": "Metrostav a.s., D9",
+"p": "obklady – mramor",
 "c": "budovy"
 }
 ];
