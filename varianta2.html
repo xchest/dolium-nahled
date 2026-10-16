@@ -480,7 +480,9 @@ function runSmash() {
   size(); addEventListener('resize', size);
   Promise.all(ph.map(im => im.decode ? im.decode().catch(() => {}) : 0)).finally(() => { build(); requestAnimationFrame(loop); });
 }
-if (RM || !cv.getContext) { intro.remove(); document.body.classList.remove('lock'); hero.classList.add('open'); }
+/* v78: intro vypnuto (AP 16. 10.: nedává smysl) — stránka začíná rovnou úvodní fotkou; runSmash ponechán, zapne se přidáním ?intro do URL */
+const INTRO_ON = /[?&]intro\b/.test(location.search);
+if (RM || !cv.getContext || !INTRO_ON) { intro.remove(); document.body.classList.remove('lock'); openHero(); }
 else { scrollTo(0, 0); intro.onclick = endIntro; runSmash(); }
 
 /* header */
