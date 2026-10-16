@@ -137,6 +137,7 @@ body.lock{overflow:hidden}
 /* ---------- počítadlo let ---------- */
 .roky{position:relative;background:var(--night);color:#e9ece9}
 .stage{position:relative;height:100svh;min-height:600px;overflow:hidden}
+.stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,transparent,var(--night));z-index:2;pointer-events:none}
 .stage .bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(38px) saturate(.7);opacity:.22;transition:background-image .6s}
 .intro-r{position:absolute;top:92px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--sand)}
 .counter{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:min(560px,42vw);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:4;cursor:ns-resize;touch-action:none;user-select:none;border-radius:28px;transition:background .3s}
@@ -280,6 +281,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .card figure{aspect-ratio:16/7}
   .rail{bottom:26px}.rail b{width:8px}.rail b.on{width:18px}
   .cols,.contact-hero{grid-template-columns:1fr}
+  .about .wm{display:none}
   .row{grid-template-columns:80px 1fr;gap:4px 16px}
   .row .o,.row .p{grid-column:2}
 }
@@ -308,7 +310,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .hero.mat .dmr{opacity:1}
 @media (prefers-reduced-motion:reduce){.dmr img{animation:none}}
 /* v81 intro: na bílé přilétají linky, stočí se do znaku a nápisu DOLIUM; nápis pak sjede na vrata, znak se rozpustí a splyne s hladinou */
-.lin{position:absolute;inset:0;z-index:2;display:none;flex-direction:column;align-items:center;justify-content:center;gap:clamp(22px,4vh,40px);overflow:hidden}
+.lin{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(22px,4vh,40px);overflow:hidden}
 .lin.on{display:flex}
 .lin .lbg{position:absolute;inset:0;background:#fbfaf7}
 .lin svg{position:relative;overflow:visible;transform-origin:0 0}
@@ -374,7 +376,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="txt"><div class="wrap">
     <div class="eyebrow rise r1">DOLIUM s.r.o. · Praha · od 2007</div>
     <h1 class="rise r2">Kámen, který <span class="serif">drží stavby.</span></h1>
-    <p class="rise r3">Dlažby, schodiště, obklady, fasády, opěrné a nábřežní zdi a repase kamenných prvků — pro metro, železnici, vodní díla i historické budovy.</p>
+    <p class="rise r3">Dlažby, schodiště, obklady, fasády, opěrné a&nbsp;nábřežní zdi a&nbsp;repase kamenných prvků — pro metro, železnici, vodní díla i&nbsp;historické budovy.</p>
   </div></div>
   <div class="cap">Plavební komora — rekonstrukce kamenných zdí</div>
   <a class="scrollhint" href="#roky" aria-label="Posunout na reference"></a>
@@ -394,31 +396,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <svg class="wm" viewBox="0 0 100 117" aria-hidden="true"><g filter="url(#blok)"><rect width="100" height="95" fill="url(#mV)"/><path fill="url(#mW)" filter="url(#inlay)" d="M20 14.6h22.6v67.2H20zM50 14.6h6c12 0 20.3 14 20.3 33.6S68 81.8 56 81.8h-6z"/><rect y="95" width="100" height="22" fill="url(#mW)"/><text x="50" y="113.3" text-anchor="middle" textLength="92" lengthAdjust="spacingAndGlyphs" font-family="Inter Tight,Helvetica,Arial,sans-serif" font-size="20.5" font-weight="500" fill="url(#mV)">DOLIUM</text></g></svg>
   <div class="wrap cols">
     <div>
-      <div class="eyebrow rv">O nás</div>
+      <div class="eyebrow rv">O&nbsp;nás</div>
       <h2 class="rv">Kamenické práce na stavbách <span class="serif">od roku 2007</span></h2>
-      <p class="rv" style="margin-top:24px;font-size:18px">DOLIUM s.r.o. dodává a montuje kamenné prvky pro stavby dopravní infrastruktury, vodní díla i budovy. Pracujeme s žulou, mramorem, travertinem, pískovcem i lomovým kamenem. Opravujeme a restaurujeme také historické kamenné konstrukce.</p>
+      <p class="rv" style="margin-top:24px;font-size:18px">DOLIUM s.r.o. dodává a&nbsp;montuje kamenné prvky pro stavby dopravní infrastruktury, vodní díla i&nbsp;budovy. Pracujeme s&nbsp;žulou, mramorem, travertinem, pískovcem i&nbsp;lomovým kamenem. Opravujeme a&nbsp;restaurujeme také historické kamenné konstrukce.</p>
       <ul class="services rv">
-        <li data-n="01">Kamenné dlažby a obklady</li>
+        <li data-n="01">Kamenné dlažby a&nbsp;obklady</li>
         <li data-n="02">Kamenná schodiště</li>
         <li data-n="03">Kamenné fasády</li>
-        <li data-n="04">Opěrné a nábřežní zdi</li>
+        <li data-n="04">Opěrné a&nbsp;nábřežní zdi</li>
         <li data-n="05">Obklady mostních pilířů</li>
         <li data-n="06">Architektonické kamenné prvky</li>
-        <li data-n="07">Repase a restaurování</li>
+        <li data-n="07">Repase a&nbsp;restaurování</li>
       </ul>
     </div>
     <div>
       <div class="person rv">
         <em>jednatel</em>
         <b>Ing. Josef Tomka</b>
-        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a dopravní stavby, zaměření geotechnika.</p>
+        <p>Absolvent Fakulty stavební ČVUT, obor Konstrukce a&nbsp;dopravní stavby, zaměření geotechnika.</p>
         <ul class="cv">
           <li><strong>19 let ve společnosti Metrostav</strong> — projekce, předvýrobní příprava, oddělení tunelářské technologie</li>
-          <li><strong>Zahraniční stáž v Turecku</strong> — ražba tunelu Selatin Novou rakouskou tunelovací metodou (NRTM)</li>
+          <li><strong>Zahraniční stáž v&nbsp;Turecku</strong> — ražba tunelu Selatin Novou rakouskou tunelovací metodou (NRTM)</li>
           <li><strong>Zakládající vedoucí</strong> pobočky Metrostav Plzeň</li>
-          <li><strong>Od roku 1994</strong> se věnuje kamenickým stavbám; člen Svazu kameníků a kamenosochařů ČR</li>
+          <li><strong>Od roku 1994</strong> se věnuje kamenickým stavbám; člen Svazu kameníků a&nbsp;kamenosochařů ČR</li>
         </ul>
-        <p>Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl. m. Prahy, stanic metra Náměstí Míru, Kolbenova a Černý Most a Lahovického mostu.</p>
+        <p>Před založením firmy se podílel mimo jiné na stavbách Burzy cenných papírů, Archivu hl.&nbsp;m.&nbsp;Prahy, stanic metra Náměstí Míru, Kolbenova a&nbsp;Černý Most a&nbsp;Lahovického mostu.</p>
       </div>
       <div class="person rv">
         <em>stavbyvedoucí</em>
@@ -430,7 +432,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section id="kontakt">
   <div class="wrap contact-hero">
-    <div class="rv"><div class="eyebrow">Kontakt</div><h2>Máte stavbu <span class="serif">z kamene?</span></h2></div>
+    <div class="rv"><div class="eyebrow">Kontakt</div><h2>Máte stavbu <span class="serif">z&nbsp;kamene?</span></h2></div>
     <div class="clist rv">
       <a href="tel:+420774968651"><span>Telefon</span><b>774 968 651</b></a>
       <a href="mailto:dolium@dolium.cz"><span>E-mail</span><b>dolium@dolium.cz</b></a>
